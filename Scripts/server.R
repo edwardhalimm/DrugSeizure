@@ -29,5 +29,12 @@ shinyServer(function(input, output) {
     leaflet() %>%
       addTiles()
   })
-  
+  output$most_region_map <- renderLeaflet({
+    leaflet() %>%
+      addTiles()
+  })
+  output$most_country_map <- renderLeaflet({
+    leaflet() %>%
+      addTiles()
+  })
 })

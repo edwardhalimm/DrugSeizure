@@ -82,10 +82,16 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   ),
   
   #Most trafficked between sub-region
-  tabPanel("Most trafficked between Sub-Region"
+  tabPanel("Most trafficked between Sub-Region",
+           div(class = "outer",
+               leafletOutput("most_region_map", width = "100%", height = "100%")
+           )
   ),
   
   #Most trafficked between countries
-  tabPanel("Most trafficked between Countries"
+  tabPanel("Most trafficked between Countries",
+           div(class = "outer",
+               leafletOutput("most_country_map", width = "100%", height = "100%")
+           )
   )
 )
