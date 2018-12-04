@@ -44,31 +44,21 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   ),                    
     
     
-  #Relationship between countries with widgets - Stanley
-  tabPanel("Relationship Between Countries",
+  #Relationship between countries with widgets 
+  tabPanel("Relationship Between Seizure Country and Producing Country",
            div(class = "outer",
                leafletOutput("relationship_map", width = "100%", height = "100%"),
                absolutePanel(id = "controls", clss = "panel panel-default", fixed = TRUE,
                              draggable = TRUE, top = 70, left = "auto", right = 20, bottom = "auto",
                              width = 330, height = "auto",
                              #Widgets
-                             selectInput("subregion", label = h4("Sub-Region"), 
-                                         choices = c("North Africa", "Southern Africa", "Caribbean", "Central America",
-                                                     "South America", "Central Asia and Transcaucasian countries", "East and South-East Asia",
-                                                     "Near and Middle East /South-West Asia", "South Asia", "East Europe", "Southeast Europe",
-                                                     "West & Central Europe","Oceania"), 
-                                         selected = "North Africa"),
-                             selectInput("country", label = h4("Country"),
+                             selectInput("country2", label = h4("Country"),
                                          choices = c("Algeria", "Libyan Arab Jamahiriya","Morocco", "Zambia","Cuba","El Salvador","Chile","Armenia",
                                                      "Azerbaijan","Georgia", "Tajikistan","Uzbekistan","China","Macau, SAR of China","Afghanistan",
                                                      "Pakistan","Syrian Arab Republic","India","Russian Federation","Bulgaria","Croatia","Serbia",
                                                      "Austria","Cyprus","Czech Republic","Czechia","Denmark","Finland","Greece","Lithuania","Malta",
-                                                     "Portugal","Slovakia","Slovenia","Spain","Switzerland", "New Zealand",""), 
-                                         selected = ""),
-                             dateInput("date",label = h4("Choose Date:"),
-                                       min = as.Date("2016-01-01"),
-                                       max = as.Date("2016-12-31"),
-                                       value = c(as.Date("2016-01-01")))
+                                                     "Portugal","Slovakia","Slovenia","Spain","Switzerland", "New Zealand"), 
+                                         selected = "Algeria")
                              
                ) 
            )
@@ -88,3 +78,5 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
            )
   )
 )
+
+shinyUI(ui)
