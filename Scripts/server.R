@@ -15,7 +15,7 @@ library(shinydashboard)
 library(graphics)
 library(googleVis)
 
-function()
+
 
 data <- suppressWarnings(read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
@@ -43,10 +43,13 @@ data <- left_join(data, match_and_coords, by = c("DEPARTURE_COUNTRY" = "COUNTRY"
 
 names(match_and_coords) <- c("COUNTRY","LAT_DESTINATION","LNG_DESTINATION")
 data <- left_join(data, match_and_coords, by = c("DESTINATION_COUNTRY" = "COUNTRY"))
+
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
 #maptile <- "https://api.mapbox.com/v4/mapbox.emerald/page.html?access_token=pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA"
 
 shinyServer(function(input, output) {
+
+
   output$seizures_map <- renderLeaflet({
     leaflet() %>% 
       addTiles() 
