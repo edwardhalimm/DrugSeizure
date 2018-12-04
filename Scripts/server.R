@@ -24,7 +24,21 @@ shinyServer(function(input, output) {
 
   output$seizures_map <- renderLeaflet({
     leaflet() %>% 
-      addTiles() 
+      addTiles() %>%
+      setView() %>%
+      addCircles()
+    
+    #Button to zoom out
+    addEasyButton((easyButton(
+      icon = "fa-globe", title = "Zoom to Level 1",
+      onClick = JS("function(btn, map){map.setZoom(1); }")
+    ))) %>%
+    #Button to locate user
+    addEasyButton(easyButton(
+      icon = "fa-crosshairs", title = "Locate Me",
+      onClick = JS("function(btn,map){ map.locate({setView:true}); }")
+    )) 
+    
   })
   output$relationship_map <- renderLeaflet({
     leaflet() %>%
