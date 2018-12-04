@@ -44,23 +44,29 @@ data <- left_join(data, match_and_coords, by = c("DEPARTURE_COUNTRY" = "COUNTRY"
 names(match_and_coords) <- c("COUNTRY","LAT_DESTINATION","LNG_DESTINATION")
 data <- left_join(data, match_and_coords, by = c("DESTINATION_COUNTRY" = "COUNTRY"))
 
+names(match_and_coords) <- c("country", "lat", "long")
+coords <- match_and_coords
+
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
 #maptile <- "https://api.mapbox.com/v4/mapbox.emerald/page.html?access_token=pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA"
+
+
 
 shinyServer(function(input, output) {
 
 
   output$seizures_map <- renderLeaflet({
-    leaflet() %>% 
-      addTiles() 
+    leaflet() %>%
+      addTiles()
   })
   output$relationship_map <- renderLeaflet({
     leaflet() %>%
       addTiles()
   })
   output$most_region_map <- renderLeaflet({
-    leaflet() %>%
-      addTiles()
+    # test
+    leaflet(data = coords[1:20,]) %>% addTiles() %>%
+      addMarkers(~long, ~lat)
   })
   output$most_country_map <- renderLeaflet({
     leaflet() %>%
