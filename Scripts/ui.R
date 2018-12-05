@@ -69,8 +69,8 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
                                          selected = "All"),
                              selectInput("drugType", label = h4 ("Drug type"),
                                          choices = distinct(data, DRUG_NAME)),
-                             plotOutput("testingPlot")
-                             
+                             textInput("target_zone", "Ex: Bamako")
+               
                              
                )
            )

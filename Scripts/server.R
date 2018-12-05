@@ -140,7 +140,7 @@ shinyServer(function(input, output) {
      
   })
   
-  ###
+  #Subregion Data
   subregionCoords <- read.csv("../data/subregion_coords.csv", stringsAsFactors = FALSE)
   
   #Icon
@@ -181,10 +181,18 @@ shinyServer(function(input, output) {
     paste(the_long)
   })
   
-  
-  
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
+    if(input$target_zone=="Ex: Bamako"){
+      ZOOM=2
+      LAT=0
+      LONG=0
+    }else{
+      target_pos=geocode(input$target_zone)
+      LAT=target_pos$lat
+      LONG=target_pos$lon
+      ZOOM=12
+    }
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
     num_long <- paste(view_longitude())
     num_lat <- paste(view_latitude())
@@ -207,6 +215,8 @@ shinyServer(function(input, output) {
                           "Amount of drug seizure in this region: ", content, "<br>", 
                           drug_in_the_region)
       ) %>%
+      addProviderTiles("Esri.WorldImagery") %>% 
+      
       addEasyButton((easyButton(
         icon = "fa-globe", title = "Zoom out",
         onClick = JS("function(btn, map){map.setZoom(1); }")
@@ -219,7 +229,6 @@ shinyServer(function(input, output) {
         completedColor = "#7D4479")
       
   })
-  
   
   ###
   
