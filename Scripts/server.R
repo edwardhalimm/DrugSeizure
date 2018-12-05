@@ -16,20 +16,19 @@ library(graphics)
 library(googleVis)
 
 
-
+#Read in original data set and set useful columns
 data <- suppressWarnings(read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
                       DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
 
-
-
+#Read in coordinates data sets
 coords <- read.csv("../data/coords.csv", stringsAsFactors = FALSE)
 names(coords) <- c("iso2c", "lat", "lng", "name")
 match_table <- read.csv("../data/country_codes.csv", stringsAsFactors = FALSE)
 match_table <- select(match_table,country_name,iso2c)
 
-
-# loses a few that do not exist in both
+#Join coordinate columns to data
+#loses a few that do not exist in both(useful)
 match_and_coords <- inner_join(coords, match_table, by = "iso2c") %>% select(country_name, lat, lng)
 
 names(match_and_coords) <- c("COUNTRY","LAT_COUNTRY","LNG_COUNTRY")
@@ -54,37 +53,50 @@ coords <- match_and_coords
 
 shinyServer(function(input, output) {
 
-
   output$seizures_map <- renderLeaflet({
-<<<<<<< HEAD
     leaflet() %>% 
       addTiles() %>%
-      setView() %>%
-      addCircles()
-    
+      setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
+      addCircles( lng = data$LNG_COUNTRY, lat = data$LAT_COUNTRY,
+                   weight = 1, 
+                   radius = data$AMOUNT / 10,
+                   color = "#FFA500",
+                   popup = paste("Country: ", data$COUNTRY,
+                                "<br>Drug Name: ", data$DRUG_NAME,
+                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)) %>%
     #Button to zoom out
-    addEasyButton((easyButton(
-      icon = "fa-globe", title = "Zoom to Level 1",
-      onClick = JS("function(btn, map){map.setZoom(1); }")
-    ))) %>%
-    #Button to locate user
-    addEasyButton(easyButton(
-      icon = "fa-crosshairs", title = "Locate Me",
-      onClick = JS("function(btn,map){ map.locate({setView:true}); }")
-    )) 
-    
+     addEasyButton((easyButton(
+       icon = "fa-globe", title = "Zoom to Level 1",
+       onClick = JS("function(btn, map){map.setZoom(1); }")
+     ))) %>%
+     #Button to locate user
+     addEasyButton(easyButton(
+       icon = "fa-crosshairs", title = "Locate Me",
+       onClick = JS("function(btn,map){ map.locate({setView:true}); }")
+     ))
   })
+  #Action on selectInput
+  observeEvent(input$subregion, {
+      leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
+      position = which(data$SUBREGION == input$subregion)
+      leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
+                                                  lat = data$LAT_COUNTRY[position], weight = 1, 
+                                                  radius = data$AMOUNT / 10, color = "#FFA500") %>%
+        addPopups(lng = data$LNG_COUNTRY[position], lat =data$LAT_COUNTRY[position], 
+                  popup = paste("Country: ", data$COUNTRY,
+                                "<br>Drug Name: ", data$DRUG_NAME,
+                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT))
+  })
+  
   output$relationship_map <- renderLeaflet({
-=======
->>>>>>> 618b94bf1965b392454829357a4a9b62c41586c2
     leaflet() %>%
       addTiles()
   })
   
   
   output$relationship_map <- renderLeaflet({
-    drug_data <- read_xlsx("data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
-    location_data <- read_xlsx("data/Location_longitude_latitude.xlsx", col_names = TRUE)
+    drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
+    location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
     df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE) 
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
