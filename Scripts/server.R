@@ -173,23 +173,21 @@ shinyServer(function(input, output) {
   
   #Subregion Set View LATITUDE
   view_latitude <- reactive({
-    finding_lat <- filter(subregionCoords, subregionCoords$subregion == "Caribbean")
+    finding_lat <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
     the_lat <- finding_lat$latitude
-    the_lat
   })
   
   #Subregion Set View LONGITUDE
   view_longitude <- reactive({
-    finding_long <- filter(subregionCoords, subregionCoords$subregion == "Caribbean")
+    finding_long <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
     the_long <- finding_long$longitude
-    the_long
   })
   
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
-    num_long <- paste(view_longitude())
-    num_lat <- paste(view_latitude())
+    num_long <- view_longitude()
+    num_lat <- view_latitude()
  
     leaflet(data = subregionCoords[1:13,]) %>% 
       addTiles() %>% 
