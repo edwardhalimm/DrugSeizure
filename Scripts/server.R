@@ -77,15 +77,18 @@ shinyServer(function(input, output) {
   })
   #Action on selectInput
   observeEvent(input$subregion, {
+      #Clear the map
       leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
+      #using user input
       position = which(data$SUBREGION == input$subregion)
+      #Display new circles according to user input
       leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
                                                   lat = data$LAT_COUNTRY[position], weight = 1, 
-                                                  radius = data$AMOUNT / 10, color = "#FFA500") %>%
-        addPopups(lng = data$LNG_COUNTRY[position], lat =data$LAT_COUNTRY[position], 
-                  popup = paste("Country: ", data$COUNTRY,
-                                "<br>Drug Name: ", data$DRUG_NAME,
-                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT))
+                                                  radius = data$AMOUNT / 10, color = "#FFA500",
+                                                  popup = paste("Country: ", data$COUNTRY,
+                                                                "<br>Drug Name: ", data$DRUG_NAME,
+                                                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
+                                                  )
   })
   
   output$relationship_map <- renderLeaflet({
