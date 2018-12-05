@@ -16,20 +16,19 @@ library(graphics)
 library(googleVis)
 
 
-
+#Read in original data set and set useful columns
 data <- suppressWarnings(read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
                       DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
 
-
-
+#Read in coordinates data sets
 coords <- read.csv("../data/coords.csv", stringsAsFactors = FALSE)
 names(coords) <- c("iso2c", "lat", "lng", "name")
 match_table <- read.csv("../data/country_codes.csv", stringsAsFactors = FALSE)
 match_table <- select(match_table,country_name,iso2c)
 
-
-# loses a few that do not exist in both
+#Join coordinate columns to data
+#loses a few that do not exist in both(useful)
 match_and_coords <- inner_join(coords, match_table, by = "iso2c") %>% select(country_name, lat, lng)
 
 names(match_and_coords) <- c("COUNTRY","LAT_COUNTRY","LNG_COUNTRY")
@@ -58,8 +57,45 @@ arrow_chart$lat <- as.numeric(arrow_chart$lat)
 
 shinyServer(function(input, output) {
 
-
   output$seizures_map <- renderLeaflet({
+    leaflet() %>% 
+      addTiles() %>%
+      setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
+      addCircles( lng = data$LNG_COUNTRY, lat = data$LAT_COUNTRY,
+                   weight = 1, 
+                   radius = data$AMOUNT / 10,
+                   color = "#FFA500",
+                   popup = paste("Country: ", data$COUNTRY,
+                                "<br>Drug Name: ", data$DRUG_NAME,
+                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)) %>%
+    #Button to zoom out
+     addEasyButton((easyButton(
+       icon = "fa-globe", title = "Zoom to Level 1",
+       onClick = JS("function(btn, map){map.setZoom(1); }")
+     ))) %>%
+     #Button to locate user
+     addEasyButton(easyButton(
+       icon = "fa-crosshairs", title = "Locate Me",
+       onClick = JS("function(btn,map){ map.locate({setView:true}); }")
+     ))
+  })
+  #Action on selectInput
+  observeEvent(input$subregion, {
+      #Clear the map
+      leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
+      #using user input
+      position = which(data$SUBREGION == input$subregion)
+      #Display new circles according to user input
+      leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
+                                                  lat = data$LAT_COUNTRY[position], weight = 1, 
+                                                  radius = data$AMOUNT / 10, color = "#FFA500",
+                                                  popup = paste("Country: ", data$COUNTRY,
+                                                                "<br>Drug Name: ", data$DRUG_NAME,
+                                                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
+                                                  )
+  })
+  
+  output$relationship_map <- renderLeaflet({
     leaflet() %>%
       addTiles()
   })
@@ -95,25 +131,110 @@ shinyServer(function(input, output) {
         leaflet() %>%
         addTiles() %>%
         addMarkers(popup="Producing Country") %>%
-        addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure Country")
+        addAwesomeMarkers(lat = 2.4, lng = 1.4, icon = icon, popup="Seizure Country")
       } else {
           df %>%
           leaflet() %>%
           addTiles() %>%
           addMarkers(popup="Producing Country") %>%
-          addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
+          addAwesomeMarkers(lat = 2.7, lng = 3.4, icon = icon, popup="Seizure and Producing Country")
       }
     
     
      
   })
-  output$most_region_map <- renderLeaflet({
-    # test
-    leaflet(data = coords[1:20,]) %>% addTiles() %>%
-      addMarkers(~long, ~lat)
+  
+  #Subregion Data
+  subregionCoords <- read.csv("../data/subregion_coords.csv", stringsAsFactors = FALSE)
+  
+  #Icon
+  skullIcon <- iconList(
+    skull = makeIcon("skull.png", "../data/skull.png", 40, 40)
+  )
+  
+  #Amount of drug seizure each subregion
+  count_subregion <- group_by(data, SUBREGION) %>% 
+    summarise(count = n())
+  
+  #Amount of drug type each subregion
+  drug_type_count <- reactive({   
+    drug_in_each_subregion <- filter(data, data$SUBREGION == input$subregion)
+    drug_type_in_subregion <- filter(drug_in_each_subregion, drug_in_each_subregion$DRUG_NAME == input$drugType)
+
+    count_drug_in_subregion <- group_by(drug_type_in_subregion, DRUG_NAME) %>% 
+      summarise(count = n())
+
+    number_of_the_drug <- count_drug_in_subregion$count
+    number_of_the_drug
+  })
+
+  #Number of total drug seizure in each subregion (There is this much of drug seizure in this subregion)
+  content <- paste(sep = "<br/>", count_subregion$count)
+  
+  #Subregion Set View LATITUDE
+  view_latitude <- reactive({
+    finding_lat <- filter(subregionCoords, subregionCoords$subregion == "East Europe")
+    the_lat <- finding_lat$latitude
+    paste(the_lat)
   })
   
+  #Subregion Set View LONGITUDE
+  view_longitude <- reactive({
+    finding_long <- filter(subregionCoords, subregionCoords$subregion == "East Europe")
+    the_long <- finding_long$longitude
+    paste(the_long)
+  })
   
+  #Leaflet most_region_map
+  output$most_region_map <- renderLeaflet({
+    if(input$target_zone=="Ex: Bamako"){
+      ZOOM=2
+      LAT=0
+      LONG=0
+    }else{
+      target_pos=geocode(input$target_zone)
+      LAT=target_pos$lat
+      LONG=target_pos$lon
+      ZOOM=12
+    }
+    drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
+    num_long <- paste(view_longitude())
+    num_lat <- paste(view_latitude())
+ 
+    leaflet(data = subregionCoords[1:13,]) %>% 
+      addTiles() %>% 
+      setView(lng = num_long , lat = num_lat, zoom = 5) %>% 
+      addMarkers(lng = subregionCoords$longitude, lat = subregionCoords$latitude, 
+                 icon = ~skullIcon,
+                 label = "Press Me",
+                 labelOptions = labelOptions(direction = "bottom",
+                                             style = list(
+                                               "color" = "red",
+                                               "font-family" = "serif",
+                                               "font-style" = "italic",
+                                               "box-shadow" = "3px 3px rgba(0,0,0,0.25)",
+                                               "font-size" = "12px",
+                                               "border-color" = "rgba(0,0,0,0.5)")),
+                 popup = paste ("<b>", subregionCoords$subregion,"</b>", "<br>",
+                          "Amount of drug seizure in this region: ", content, "<br>", 
+                          drug_in_the_region)
+      ) %>%
+      addProviderTiles("Esri.WorldImagery") %>% 
+      
+      addEasyButton((easyButton(
+        icon = "fa-globe", title = "Zoom out",
+        onClick = JS("function(btn, map){map.setZoom(1); }")
+      ))) %>% 
+      addMeasure(
+        position = "bottomleft",
+        primaryLengthUnit = "meters",
+        primaryAreaUnit = "sqmeters",
+        activeColor = "#3D535D",
+        completedColor = "#7D4479")
+      
+  })
+  
+
   
   output$most_country_map <- renderLeaflet({
     
