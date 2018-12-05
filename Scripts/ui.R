@@ -65,12 +65,11 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
                              width = 330, height = "auto",
                              #Widgets
                              selectInput("subregion", label = h4("Sub-Region"), 
-                                         choices = distinct(data, SUBREGION), 
-                                         selected = "All"),
+                                         choices = distinct(data, SUBREGION),
+                                         selected = "East Europe"),
                              selectInput("drugType", label = h4 ("Drug type"),
-                                         choices = distinct(data, DRUG_NAME)),
-                             textInput("target_zone", "Ex: Bamako")
-               
+                                         choices = distinct(data, DRUG_NAME))
+
                              
                )
            )
