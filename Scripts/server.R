@@ -51,9 +51,46 @@ coords <- match_and_coords
 
 
 
-shinyServer(function(input, output, session) {
+shinyServer(function(input, output) {
 
- 
+  output$seizures_map <- renderLeaflet({
+    leaflet() %>% 
+      addTiles() %>%
+      setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
+      addCircles( lng = data$LNG_COUNTRY, lat = data$LAT_COUNTRY,
+                   weight = 1, 
+                   radius = data$AMOUNT / 10,
+                   color = "#FFA500",
+                   popup = paste("Country: ", data$COUNTRY,
+                                "<br>Drug Name: ", data$DRUG_NAME,
+                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)) %>%
+    #Button to zoom out
+     addEasyButton((easyButton(
+       icon = "fa-globe", title = "Zoom to Level 1",
+       onClick = JS("function(btn, map){map.setZoom(1); }")
+     ))) %>%
+     #Button to locate user
+     addEasyButton(easyButton(
+       icon = "fa-crosshairs", title = "Locate Me",
+       onClick = JS("function(btn,map){ map.locate({setView:true}); }")
+     ))
+  })
+  #Action on selectInput
+  observeEvent(input$subregion, {
+      #Clear the map
+      leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
+      #using user input
+      position = which(data$SUBREGION == input$subregion)
+      #Display new circles according to user input
+      leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
+                                                  lat = data$LAT_COUNTRY[position], weight = 1, 
+                                                  radius = data$AMOUNT / 10, color = "#FFA500",
+                                                  popup = paste("Country: ", data$COUNTRY,
+                                                                "<br>Drug Name: ", data$DRUG_NAME,
+                                                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
+                                                  )
+  })
+  
   output$relationship_map <- renderLeaflet({
     leaflet() %>%
       addTiles()
@@ -149,12 +186,12 @@ shinyServer(function(input, output, session) {
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
-   # num_long <- paste(view_longitude())
-   # num_lat <- paste(view_latitude())
+    num_long <- paste(view_longitude())
+    num_lat <- paste(view_latitude())
  
     leaflet(data = subregionCoords[1:13,]) %>% 
       addTiles() %>% 
-      setView(lng = view_longitude(), lat = view_latitude(), zoom = 5) %>% 
+      setView(lng = num_long , lat = num_lat, zoom = 5) %>% 
       addMarkers(lng = subregionCoords$longitude, lat = subregionCoords$latitude, 
                  icon = ~skullIcon,
                  label = "Press Me",
@@ -169,7 +206,11 @@ shinyServer(function(input, output, session) {
                  popup = paste ("<b>", subregionCoords$subregion,"</b>", "<br>",
                           "Amount of drug seizure in this region: ", content, "<br>", 
                           drug_in_the_region)
-      ) %>% 
+      ) %>%
+      addEasyButton((easyButton(
+        icon = "fa-globe", title = "Zoom out",
+        onClick = JS("function(btn, map){map.setZoom(1); }")
+      ))) %>% 
       addMeasure(
         position = "bottomleft",
         primaryLengthUnit = "meters",
@@ -177,17 +218,7 @@ shinyServer(function(input, output, session) {
         activeColor = "#3D535D",
         completedColor = "#7D4479")
       
-                 
-                    
   })
-  
-  
-  #cluster for COUNTRY
-  #leaflet(data = coords[1:240,]) %>% 
-    #setView(lng = -88.896530, lat = 13.79419, zoom = 10) %>%    
-    #addTiles() %>% 
-    #addMarkers(~long, ~lat, icon = ~skullIcon, clusterOptions = markerClusterOptions())
-  
   
   
   ###
