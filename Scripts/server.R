@@ -16,20 +16,19 @@ library(graphics)
 library(googleVis)
 
 
-
+#Read in original data set and set useful columns
 data <- suppressWarnings(read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
                       DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
 
-
-
+#Read in coordinates data sets
 coords <- read.csv("../data/coords.csv", stringsAsFactors = FALSE)
 names(coords) <- c("iso2c", "lat", "lng", "name")
 match_table <- read.csv("../data/country_codes.csv", stringsAsFactors = FALSE)
 match_table <- select(match_table,country_name,iso2c)
 
-
-# loses a few that do not exist in both
+#Join coordinate columns to data
+#loses a few that do not exist in both(useful)
 match_and_coords <- inner_join(coords, match_table, by = "iso2c") %>% select(country_name, lat, lng)
 
 names(match_and_coords) <- c("COUNTRY","LAT_COUNTRY","LNG_COUNTRY")
@@ -54,16 +53,16 @@ coords <- match_and_coords
 
 shinyServer(function(input, output, session) {
 
-
-  output$seizures_map <- renderLeaflet({
+ 
+  output$relationship_map <- renderLeaflet({
     leaflet() %>%
       addTiles()
   })
   
   
   output$relationship_map <- renderLeaflet({
-    drug_data <- read_xlsx("data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
-    location_data <- read_xlsx("data/Location_longitude_latitude.xlsx", col_names = TRUE)
+    drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
+    location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
     df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE) 
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
@@ -133,27 +132,29 @@ shinyServer(function(input, output, session) {
   
   #Subregion Set View LATITUDE
   view_latitude <- reactive({
-    finding_lat <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
+    finding_lat <- filter(subregionCoords, subregionCoords$subregion == "East Europe")
     the_lat <- finding_lat$latitude
-    the_lat
+    paste(the_lat)
   })
   
   #Subregion Set View LONGITUDE
   view_longitude <- reactive({
-    finding_long <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
+    finding_long <- filter(subregionCoords, subregionCoords$subregion == "East Europe")
     the_long <- finding_long$longitude
-    the_long
+    paste(the_long)
   })
+  
   
   
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
-    num_long <- paste(view_longitude())
-    num_lat <- paste(view_latitude())
+   # num_long <- paste(view_longitude())
+   # num_lat <- paste(view_latitude())
+ 
     leaflet(data = subregionCoords[1:13,]) %>% 
       addTiles() %>% 
-      setView(lng = num_long, lat = num_lat, zoom = 5) %>% 
+      setView(lng = view_longitude(), lat = view_latitude(), zoom = 5) %>% 
       addMarkers(lng = subregionCoords$longitude, lat = subregionCoords$latitude, 
                  icon = ~skullIcon,
                  label = "Press Me",
