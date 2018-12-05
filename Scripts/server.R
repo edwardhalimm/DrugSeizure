@@ -52,7 +52,7 @@ coords <- match_and_coords
 
 
 
-shinyServer(function(input, output) {
+shinyServer(function(input, output, session) {
 
 
   output$seizures_map <- renderLeaflet({
@@ -91,23 +91,106 @@ shinyServer(function(input, output) {
         leaflet() %>%
         addTiles() %>%
         addMarkers(popup="Producing Country") %>%
-        addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure Country")
+        addAwesomeMarkers(lat = 2.4, lng = 1.4, icon = icon, popup="Seizure Country")
       } else {
           df %>%
           leaflet() %>%
           addTiles() %>%
           addMarkers(popup="Producing Country") %>%
-          addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
+          addAwesomeMarkers(lat = 2.7, lng = 3.4, icon = icon, popup="Seizure and Producing Country")
       }
     
     
      
   })
-  output$most_region_map <- renderLeaflet({
-    # test
-    leaflet(data = coords[1:20,]) %>% addTiles() %>%
-      addMarkers(~long, ~lat)
+  
+  ###
+  subregionCoords <- read.csv("../data/subregion_coords.csv", stringsAsFactors = FALSE)
+  
+  #Icon
+  skullIcon <- iconList(
+    skull = makeIcon("skull.png", "../data/skull.png", 40, 40)
+  )
+  
+  #Amount of drug seizure each subregion
+  count_subregion <- group_by(data, SUBREGION) %>% 
+    summarise(count = n())
+  
+  #Amount of drug type each subregion
+  drug_type_count <- reactive({   
+    drug_in_each_subregion <- filter(data, data$SUBREGION == input$subregion)
+    drug_type_in_subregion <- filter(drug_in_each_subregion, drug_in_each_subregion$DRUG_NAME == input$drugType)
+
+    count_drug_in_subregion <- group_by(drug_type_in_subregion, DRUG_NAME) %>% 
+      summarise(count = n())
+
+    number_of_the_drug <- count_drug_in_subregion$count
+    number_of_the_drug
   })
+
+  #Number of total drug seizure in each subregion (There is this much of drug seizure in this subregion)
+  content <- paste(sep = "<br/>", count_subregion$count)
+  
+  #Subregion Set View LATITUDE
+  view_latitude <- reactive({
+    finding_lat <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
+    the_lat <- finding_lat$latitude
+    the_lat
+  })
+  
+  #Subregion Set View LONGITUDE
+  view_longitude <- reactive({
+    finding_long <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
+    the_long <- finding_long$longitude
+    the_long
+  })
+  
+  
+  #Leaflet most_region_map
+  output$most_region_map <- renderLeaflet({
+    drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
+    num_long <- paste(view_longitude())
+    num_lat <- paste(view_latitude())
+    leaflet(data = subregionCoords[1:13,]) %>% 
+      addTiles() %>% 
+      setView(lng = num_long, lat = num_lat, zoom = 5) %>% 
+      addMarkers(lng = subregionCoords$longitude, lat = subregionCoords$latitude, 
+                 icon = ~skullIcon,
+                 label = "Press Me",
+                 labelOptions = labelOptions(direction = "bottom",
+                                             style = list(
+                                               "color" = "red",
+                                               "font-family" = "serif",
+                                               "font-style" = "italic",
+                                               "box-shadow" = "3px 3px rgba(0,0,0,0.25)",
+                                               "font-size" = "12px",
+                                               "border-color" = "rgba(0,0,0,0.5)")),
+                 popup = paste ("<b>", subregionCoords$subregion,"</b>", "<br>",
+                          "Amount of drug seizure in this region: ", content, "<br>", 
+                          drug_in_the_region)
+      ) %>% 
+      addMeasure(
+        position = "bottomleft",
+        primaryLengthUnit = "meters",
+        primaryAreaUnit = "sqmeters",
+        activeColor = "#3D535D",
+        completedColor = "#7D4479")
+      
+                 
+                    
+  })
+  
+  
+  #cluster for COUNTRY
+  #leaflet(data = coords[1:240,]) %>% 
+    #setView(lng = -88.896530, lat = 13.79419, zoom = 10) %>%    
+    #addTiles() %>% 
+    #addMarkers(~long, ~lat, icon = ~skullIcon, clusterOptions = markerClusterOptions())
+  
+  
+  
+  ###
+  
   output$most_country_map <- renderLeaflet({
     leaflet() %>%
       addTiles()

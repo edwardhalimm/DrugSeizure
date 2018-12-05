@@ -67,9 +67,28 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   #Most trafficked between sub-region - Edward
   tabPanel("Most trafficked between Sub-Region",
            div(class = "outer",
-               leafletOutput("most_region_map", width = "100%", height = "100%")
+               leafletOutput("most_region_map", width = "100%", height = "100%"),
+               absolutePanel(id = "controls", clss = "panel panel-default", fixed = TRUE,
+                             draggable = TRUE, top = 70, left = "auto", right = 20, bottom = "auto",
+                             width = 330, height = "auto",
+                             #Widgets
+                             selectInput("subregion", label = h4("Sub-Region"), 
+                                         choices = distinct(data, SUBREGION), 
+                                         selected = "North Africa"),
+                            # dateInput("date",label = h4("Choose Date:"),
+                             #          min = as.Date("2016-01-01"),
+                              #         max = as.Date("2016-12-31"),
+                               #        value = c(as.Date("2016-01-01"))),
+                             selectInput("drugType", label = h4 ("Drug type"),
+                                         choices = distinct(data, DRUG_NAME)),
+                             plotOutput("testingPlot")
+                             
+                             
+               )
            )
   ),
+  
+  
   
   #Most trafficked between countries - Stanley
   tabPanel("Most trafficked between Countries",
