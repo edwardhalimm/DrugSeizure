@@ -46,9 +46,9 @@ data <- left_join(data, match_and_coords, by = c("DESTINATION_COUNTRY" = "COUNTR
 names(match_and_coords) <- c("country", "lat", "long")
 coords <- match_and_coords
 
-arrow_chart <- read.csv("../data/arrow_chart.csv", stringsAsFactors = FALSE)
-arrow_chart$long <- as.numeric(arrow_chart$long)
-arrow_chart$lat <- as.numeric(arrow_chart$lat)
+#arrow_chart <- read.csv("../data/arrow_chart.csv", stringsAsFactors = FALSE)
+#arrow_chart$long <- as.numeric(arrow_chart$long)
+#arrow_chart$lat <- as.numeric(arrow_chart$lat)
 
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
 #maptile <- "https://api.mapbox.com/v4/mapbox.emerald/page.html?access_token=pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA"
@@ -80,20 +80,20 @@ shinyServer(function(input, output) {
      ))
   })
   #Action on selectInput
-  observeEvent(input$subregion, {
-      #Clear the map
-      leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
-      #using user input
-      position = which(data$SUBREGION == input$subregion)
-      #Display new circles according to user input
-      leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
-                                                  lat = data$LAT_COUNTRY[position], weight = 1, 
-                                                  radius = data$AMOUNT / 10, color = "#FFA500",
-                                                  popup = paste("Country: ", data$COUNTRY,
-                                                                "<br>Drug Name: ", data$DRUG_NAME,
-                                                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
-                                                  )
-  })
+  # observeEvent(input$subregion, {
+  #     #Clear the map
+  #     leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
+  #     #using user input
+  #     position = which(data$SUBREGION == input$subregion)
+  #     #Display new circles according to user input
+  #     leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
+  #                                                 lat = data$LAT_COUNTRY[position], weight = 1, 
+  #                                                 radius = data$AMOUNT / 10, color = "#FFA500",
+  #                                                 popup = paste("Country: ", data$COUNTRY,
+  #                                                               "<br>Drug Name: ", data$DRUG_NAME,
+  #                                                               "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
+  #                                                 )
+  #})
   
   output$relationship_map <- renderLeaflet({
     leaflet() %>%
@@ -105,25 +105,25 @@ shinyServer(function(input, output) {
     drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
     location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
-    df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE) 
+    df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE)
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
     as.data.frame(selected_country)
-    
+
     coordinates <- filter(location_data, input$country2 == name)
     select_lat <- coordinates$latitude[1]
     select_lng <- coordinates$longitude[1]
-    
-    
+
+
     for(row in 1:nrow(selected_country)) {
       if(!is.na(selected_country$PRODUCING_COUNTRY[row]) & selected_country$PRODUCING_COUNTRY[row] != "Unknown") {
         coordinates <- filter(location_data, selected_country$PRODUCING_COUNTRY[row] == name)
         df[nrow(df)+1,] <- c(coordinates$latitude[1], coordinates$longitude[1])
         if (input$country2== selected_country$PRODUCING_COUNTRY[row]) {
-          val <- 1 
+          val <- 1
         }
       }
     }
-    
+
     icon <- awesomeIcons(icon = 'flag', iconColor = 'red')
       if(val == 0) {
         na.omit(df)
@@ -139,9 +139,9 @@ shinyServer(function(input, output) {
           addMarkers(popup="Producing Country") %>%
           addAwesomeMarkers(lat = 2.7, lng = 3.4, icon = icon, popup="Seizure and Producing Country")
       }
-    
-    
-     
+
+
+
   })
   
   #Subregion Data
