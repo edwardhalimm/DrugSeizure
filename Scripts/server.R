@@ -50,14 +50,15 @@ coords <- match_and_coords
 #arrow_chart$long <- as.numeric(arrow_chart$long)
 #arrow_chart$lat <- as.numeric(arrow_chart$lat)
 
+
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
 #maptile <- "https://api.mapbox.com/v4/mapbox.emerald/page.html?access_token=pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA"
 
 
 
 shinyServer(function(input, output) {
-
   output$seizures_map <- renderLeaflet({
+    
     leaflet() %>% 
       addTiles() %>%
       setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
@@ -93,8 +94,14 @@ shinyServer(function(input, output) {
   #                                                               "<br>Drug Name: ", data$DRUG_NAME,
   #                                                               "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
   #                                                 )
+<<<<<<< HEAD
   #})
+=======
+  # })
   
+>>>>>>> 7adac61b154ab8a867ab2522703ccb02a7d13192
+  
+  # delete?
   output$relationship_map <- renderLeaflet({
     leaflet() %>%
       addTiles()
@@ -102,6 +109,7 @@ shinyServer(function(input, output) {
   
   
   output$relationship_map <- renderLeaflet({
+    
     drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
     location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
@@ -145,6 +153,8 @@ shinyServer(function(input, output) {
   })
   
   #Subregion Data
+
+  
   subregionCoords <- read.csv("../data/subregion_coords.csv", stringsAsFactors = FALSE)
   
   #Icon
@@ -185,11 +195,13 @@ shinyServer(function(input, output) {
   
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
+
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
     num_long <- view_longitude()
     num_lat <- view_latitude()
  
     leaflet(data = subregionCoords[1:13,]) %>% 
+      
       addTiles() %>% 
       setView(lng = num_long, lat = num_lat, zoom = 5) %>% 
       addMarkers(lng = subregionCoords$longitude, lat = subregionCoords$latitude, 
@@ -224,7 +236,6 @@ shinyServer(function(input, output) {
   
   output$most_country_map <- renderLeaflet({
     
-  
     leaflet(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,]) %>%
       addTiles() %>%
       addPolylines(lat = ~lat,
