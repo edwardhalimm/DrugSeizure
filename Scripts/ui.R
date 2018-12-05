@@ -36,7 +36,7 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   ),                    
     
     
-  #Relationship between countries with widgets -stanley
+  #Relationship between countries with widgets - Stanley
   tabPanel("Relationship Between Seizure Country and Producing Country",
            div(class = "outer",
                leafletOutput("relationship_map", width = "100%", height = "100%"),
@@ -59,6 +59,7 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   #Most trafficked between sub-region - Edward
   tabPanel("Most trafficked between Sub-Region",
            div(class = "outer",
+
                leafletOutput("most_region_map", width = "100%", height = "100%"),
                absolutePanel(id = "controls", clss = "panel panel-default", fixed = TRUE,
                              draggable = TRUE, top = 140, left = "auto", right = 1, bottom = "auto",
@@ -78,7 +79,19 @@ ui <- navbarPage("Drug Seizures Report", theme = "bootstrap.css",
   #Most trafficked between countries - adrian
   tabPanel("Most trafficked between Countries",
            div(class = "outer",
-               leafletOutput("most_country_map", width = "100%", height = "100%")
+               leafletOutput("most_country_map", width = "100%", height = "100%"),
+               absolutePanel(id = "controls", clss = "panel panel-default", fixed = TRUE,
+                             draggable = TRUE, top = 70, left = "auto", right = 20, bottom = "auto",
+                             width = 330, height = "auto",
+                             #Widgets
+                             selectInput("subregion", label = h4("Sub-Region"), 
+                                         choices = distinct(data, SUBREGION), 
+                                         selected = "North Africa"),
+                             selectInput("drug", label = h4("Drug Names"),
+                                         choices = distinct(data, DRUG_NAME),
+                                         selected = "Cannabis resin")
+
+               ) 
            )
   )
 )

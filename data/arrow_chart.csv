@@ -1,0 +1,530 @@
+long,lat,group,color,drug,subregion
+1.659626,28.033886,L2,red,Heroin,North Africa
+17.228331,26.3351,L3,red,Heroin,North Africa
+-7.09262,31.791702,L4,red,Heroin,North Africa
+1.659626,28.033886,L2,red,Cannabis Sativa,North Africa
+1.659626,28.033886,L2,red,Cocaine,North Africa
+17.228331,26.3351,L3,red,Cocaine,North Africa
+-7.09262,31.791702,L4,red,Cocaine,North Africa
+17.228331,26.3351,L2,red,Unknown,North Africa
+17.228331,26.3351,L2,red,Cannabis resin,North Africa
+-7.09262,31.791702,L3,red,Cannabis resin,North Africa
+-7.09262,31.791702,L2,red,Cannabis Herb (Marijuana),North Africa
+-7.09262,31.791702,L2,red,Non-specified psychotropic substances,North Africa
+-7.09262,31.791702,L2,red,Ecstasy,North Africa
+-7.09262,31.791702,L2,red,Tabacco,North Africa
+-7.09262,31.791702,L2,red,Edible cannabis,North Africa
+27.849332,-13.133897,L2,red,Heroin,Southern Africa
+27.849332,-13.133897,L2,red,Cocaine,Southern Africa
+27.849332,-13.133897,L2,red,Cannabis resin,Southern Africa
+27.849332,-13.133897,L2,red,Cannabis Herb (Marijuana),Southern Africa
+27.849332,-13.133897,L2,red,Pseudoephedrine,Southern Africa
+27.849332,-13.133897,L2,red,Cannabis seeds,Southern Africa
+27.849332,-13.133897,L2,red,Cannabis Plants,Southern Africa
+27.849332,-13.133897,L2,red,Opium,Southern Africa
+-77.781167,21.521757,L2,red,Cocaine,Caribbean
+-77.781167,21.521757,L2,red,Cannabis Herb (Marijuana),Caribbean
+-88.89653,13.794185,L2,red,Cocaine,Central America
+-88.89653,13.794185,L2,red,Cannabis Herb (Marijuana),Central America
+-88.89653,13.794185,L2,red,Ecstasy,Central America
+-88.89653,13.794185,L2,red,Cannabis Plants,Central America
+-88.89653,13.794185,L2,red,Crack,Central America
+-88.89653,13.794185,L2,red,Methamphetamine,Central America
+-71.542969,-35.675147,L2,red,Cannabis Sativa,South America
+-71.542969,-35.675147,L2,red,Cocaine,South America
+-71.542969,-35.675147,L2,red,Cannabis resin,South America
+-71.542969,-35.675147,L2,red,Cannabis Herb (Marijuana),South America
+-71.542969,-35.675147,L2,red,Ecstasy,South America
+-71.542969,-35.675147,L2,red,Cannabis seeds,South America
+-71.542969,-35.675147,L2,red,Cannabis Plants,South America
+-71.542969,-35.675147,L2,red,Crack,South America
+-71.542969,-35.675147,L2,red,Methamphetamine,South America
+-71.542969,-35.675147,L2,red,Coca paste,South America
+-71.542969,-35.675147,L2,red,Cocaine HCL,South America
+-71.542969,-35.675147,L2,red,Cocaine Base,South America
+-71.542969,-35.675147,L2,red,Non-specified pharmaceuticals,South America
+-71.542969,-35.675147,L2,red,Morphine,South America
+-71.542969,-35.675147,L2,red,LSD,South America
+-71.542969,-35.675147,L2,red,25I-NBOMe,South America
+-71.542969,-35.675147,L2,red,2C-B,South America
+-71.542969,-35.675147,L2,red,Coca leaf,South America
+-71.542969,-35.675147,L2,red,Other,South America
+-71.542969,-35.675147,L2,red,Hydrochloric Acid,South America
+-71.542969,-35.675147,L2,red,Hallucinogens,South America
+-71.542969,-35.675147,L2,red,Sodium Carbonate,South America
+-71.542969,-35.675147,L2,red,Sulphuric Acid,South America
+-71.542969,-35.675147,L2,red,DOC,South America
+-71.542969,-35.675147,L2,red,Psilocybin (mushrooms),South America
+-71.542969,-35.675147,L2,red,Amphetamine,South America
+-71.542969,-35.675147,L2,red,4-fluoromethcathinone,South America
+-71.542969,-35.675147,L2,red,Mephedrone,South America
+-71.542969,-35.675147,L2,red,Methylphenidate,South America
+-71.542969,-35.675147,L2,red,Liquid cocaine,South America
+-71.542969,-35.675147,L2,red,Acetone/Ethyl Ether,South America
+-71.542969,-35.675147,L2,red,2C-E,South America
+-71.542969,-35.675147,L2,red,Ketamine,South America
+-71.542969,-35.675147,L2,red,DOB,South America
+-71.542969,-35.675147,L2,red,Ephedrine,South America
+47.576927,40.143105,L2,red,Heroin,Central Asia and Transcaucasian countries
+43.356892,42.315407,L3,red,Heroin,Central Asia and Transcaucasian countries
+71.276093,38.861034,L4,red,Heroin,Central Asia and Transcaucasian countries
+64.585262,41.377491,L5,red,Heroin,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Cocaine,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Cannabis resin,Central Asia and Transcaucasian countries
+47.576927,40.143105,L3,red,Cannabis resin,Central Asia and Transcaucasian countries
+71.276093,38.861034,L4,red,Cannabis resin,Central Asia and Transcaucasian countries
+64.585262,41.377491,L5,red,Cannabis resin,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Cannabis Herb (Marijuana),Central Asia and Transcaucasian countries
+47.576927,40.143105,L3,red,Cannabis Herb (Marijuana),Central Asia and Transcaucasian countries
+71.276093,38.861034,L4,red,Cannabis Herb (Marijuana),Central Asia and Transcaucasian countries
+64.585262,41.377491,L5,red,Cannabis Herb (Marijuana),Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Ecstasy,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Opium,Central Asia and Transcaucasian countries
+47.576927,40.143105,L3,red,Opium,Central Asia and Transcaucasian countries
+71.276093,38.861034,L4,red,Opium,Central Asia and Transcaucasian countries
+64.585262,41.377491,L5,red,Opium,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Methamphetamine,Central Asia and Transcaucasian countries
+47.576927,40.143105,L3,red,Methamphetamine,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Morphine,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Bromazepam,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Diazepam,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Alprazolam (Xanax),Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Methadone,Central Asia and Transcaucasian countries
+47.576927,40.143105,L3,red,Methadone,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Tramadol,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Buprenorphine,Central Asia and Transcaucasian countries
+45.038189,40.069099,L2,red,Cannabis Oil,Central Asia and Transcaucasian countries
+47.576927,40.143105,L2,red,Brotizolam,Central Asia and Transcaucasian countries
+47.576927,40.143105,L2,red,Clonazepam,Central Asia and Transcaucasian countries
+43.356892,42.315407,L2,red,Non-specified NPS,Central Asia and Transcaucasian countries
+43.356892,42.315407,L2,red,Pregabalin,Central Asia and Transcaucasian countries
+43.356892,42.315407,L2,red,Cannabis,Central Asia and Transcaucasian countries
+43.356892,42.315407,L2,red,Opium Poppy,Central Asia and Transcaucasian countries
+64.585262,41.377491,L2,red,Poppy straw,Central Asia and Transcaucasian countries
+64.585262,41.377491,L2,red,AB-FUBINACA,Central Asia and Transcaucasian countries
+113.543873,22.198745,L2,red,Cocaine,East and South-East Asia
+113.543873,22.198745,L2,red,Cannabis Herb (Marijuana),East and South-East Asia
+113.543873,22.198745,L2,red,Ecstasy,East and South-East Asia
+104.195397,35.86166,L2,red,Methamphetamine,East and South-East Asia
+113.543873,22.198745,L3,red,Methamphetamine,East and South-East Asia
+104.195397,35.86166,L2,red,Ketamine,East and South-East Asia
+113.543873,22.198745,L3,red,Ketamine,East and South-East Asia
+104.195397,35.86166,L2,red,Karcidone,East and South-East Asia
+113.543873,22.198745,L2,red,Nitrazepam,East and South-East Asia
+113.543873,22.198745,L2,red,THC,East and South-East Asia
+113.543873,22.198745,L2,red,Nimetazepam,East and South-East Asia
+67.709953,33.93911,L2,red,Heroin,Near and Middle East /South-West Asia
+69.345116,30.375321,L3,red,Heroin,Near and Middle East /South-West Asia
+38.996815,34.802075,L4,red,Heroin,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Cocaine,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Unknown,Near and Middle East /South-West Asia
+38.996815,34.802075,L3,red,Unknown,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Cannabis resin,Near and Middle East /South-West Asia
+38.996815,34.802075,L3,red,Cannabis resin,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Ecstasy,Near and Middle East /South-West Asia
+67.709953,33.93911,L2,red,Opium,Near and Middle East /South-West Asia
+69.345116,30.375321,L3,red,Opium,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Methamphetamine,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Morphine,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Other,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Sulphuric Acid,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Sulphuric Acid,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Amphetamine,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Diazepam,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Diazepam,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Alprazolam (Xanax),Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Clonazepam,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Cannabis,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Poppy straw,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Barbiturates,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Barbiturates,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Pavots,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Pavots,Near and Middle East /South-West Asia
+69.345116,30.375321,L2,red,Acetic Anhydride,Near and Middle East /South-West Asia
+38.996815,34.802075,L2,red,Captagon,Near and Middle East /South-West Asia
+78.96288,20.593684,L2,red,Heroin,South Asia
+78.96288,20.593684,L2,red,Cocaine,South Asia
+78.96288,20.593684,L2,red,Unknown,South Asia
+78.96288,20.593684,L2,red,Cannabis resin,South Asia
+78.96288,20.593684,L2,red,Cannabis Herb (Marijuana),South Asia
+78.96288,20.593684,L2,red,Non-specified psychotropic substances,South Asia
+78.96288,20.593684,L2,red,Ecstasy,South Asia
+78.96288,20.593684,L2,red,Pseudoephedrine,South Asia
+78.96288,20.593684,L2,red,Opium,South Asia
+78.96288,20.593684,L2,red,Methamphetamine,South Asia
+78.96288,20.593684,L2,red,Morphine,South Asia
+78.96288,20.593684,L2,red,LSD,South Asia
+78.96288,20.593684,L2,red,Other,South Asia
+78.96288,20.593684,L2,red,Amphetamine,South Asia
+78.96288,20.593684,L2,red,Mephedrone,South Asia
+78.96288,20.593684,L2,red,Ketamine,South Asia
+78.96288,20.593684,L2,red,Ephedrine,South Asia
+78.96288,20.593684,L2,red,Diazepam,South Asia
+78.96288,20.593684,L2,red,Alprazolam (Xanax),South Asia
+78.96288,20.593684,L2,red,Buprenorphine,South Asia
+78.96288,20.593684,L2,red,Clonazepam,South Asia
+78.96288,20.593684,L2,red,Cannabis,South Asia
+78.96288,20.593684,L2,red,Opium Poppy,South Asia
+78.96288,20.593684,L2,red,Poppy straw,South Asia
+78.96288,20.593684,L2,red,Nitrazepam,South Asia
+78.96288,20.593684,L2,red,Acetic Anhydride,South Asia
+78.96288,20.593684,L2,red,Cough sirups,South Asia
+78.96288,20.593684,L2,red,Spasmo proxyvon,South Asia
+78.96288,20.593684,L2,red,Ammonium chloride,South Asia
+78.96288,20.593684,L2,red,Methaqualone,South Asia
+78.96288,20.593684,L2,red,Pentazocine,South Asia
+78.96288,20.593684,L2,red,Zolpidem,South Asia
+78.96288,20.593684,L2,red,MDMA & Mephedrone,South Asia
+78.96288,20.593684,L2,red,Hydrocodone,South Asia
+78.96288,20.593684,L2,red,Oxycodone,South Asia
+78.96288,20.593684,L2,red,Lorazepam,South Asia
+78.96288,20.593684,L2,red,Other precursors,South Asia
+78.96288,20.593684,L2,red,Multiple drugs,South Asia
+105.318756,61.52401,L2,red,Heroin,East Europe
+31.16558,48.379433,L3,red,Heroin,East Europe
+105.318756,61.52401,L2,red,Cocaine,East Europe
+31.16558,48.379433,L3,red,Cocaine,East Europe
+105.318756,61.52401,L2,red,Cannabis resin,East Europe
+105.318756,61.52401,L2,red,Cannabis Herb (Marijuana),East Europe
+31.16558,48.379433,L3,red,Cannabis Herb (Marijuana),East Europe
+105.318756,61.52401,L2,red,Ecstasy,East Europe
+31.16558,48.379433,L3,red,Ecstasy,East Europe
+105.318756,61.52401,L2,red,Methamphetamine,East Europe
+105.318756,61.52401,L2,red,LSD,East Europe
+105.318756,61.52401,L2,red,25I-NBOMe,East Europe
+105.318756,61.52401,L2,red,2C-B,East Europe
+105.318756,61.52401,L2,red,Psilocybin (mushrooms),East Europe
+105.318756,61.52401,L2,red,Amphetamine,East Europe
+31.16558,48.379433,L3,red,Amphetamine,East Europe
+105.318756,61.52401,L2,red,Mephedrone,East Europe
+105.318756,61.52401,L2,red,DOB,East Europe
+105.318756,61.52401,L2,red,Methadone,East Europe
+31.16558,48.379433,L3,red,Methadone,East Europe
+105.318756,61.52401,L2,red,Tramadol,East Europe
+105.318756,61.52401,L2,red,Buprenorphine,East Europe
+105.318756,61.52401,L2,red,Cannabis Oil,East Europe
+105.318756,61.52401,L2,red,Brotizolam,East Europe
+105.318756,61.52401,L2,red,Clonazepam,East Europe
+105.318756,61.52401,L2,red,Poppy straw,East Europe
+105.318756,61.52401,L2,red,THC,East Europe
+105.318756,61.52401,L2,red,Acetic Anhydride,East Europe
+105.318756,61.52401,L2,red,Zolpidem,East Europe
+105.318756,61.52401,L2,red,Lorazepam,East Europe
+105.318756,61.52401,L2,red,N-Methylephedrone,East Europe
+105.318756,61.52401,L2,red,Methylester,East Europe
+105.318756,61.52401,L2,red,N-(1-carbamoil-2-methylpropyl)-1-(phenylmethyl)-1n-indazole-3-carboxamide and its derivaties,East Europe
+105.318756,61.52401,L2,red,JWH-018,East Europe
+105.318756,61.52401,L2,red,Alpha-pvp,East Europe
+31.16558,48.379433,L3,red,Alpha-pvp,East Europe
+105.318756,61.52401,L2,red,3-Methylfentanyl,East Europe
+105.318756,61.52401,L2,red,Phenyl-2-nitropropene,East Europe
+105.318756,61.52401,L2,red,Pyrovalerone,East Europe
+105.318756,61.52401,L2,red,N-(1-carbamoil-2-methylpropil)-1-pentil-1n-indazole-3-carboxamyde and its derivates,East Europe
+105.318756,61.52401,L2,red,Acyl,East Europe
+105.318756,61.52401,L2,red,2C-H,East Europe
+105.318756,61.52401,L2,red,Dimethyltryptamine (DMT),East Europe
+105.318756,61.52401,L2,red,Desomorphine,East Europe
+105.318756,61.52401,L2,red,Clobazam,East Europe
+105.318756,61.52401,L2,red,Codeine,East Europe
+105.318756,61.52401,L2,red,3-butenoyl-1-methylindole [1- (1-methyl-1H-indol-3-yl) butan-1-one] and derivatives,East Europe
+105.318756,61.52401,L2,red,Carfentanil,East Europe
+105.318756,61.52401,L2,red,Phenobarbital,East Europe
+105.318756,61.52401,L2,red,Ephedrone,East Europe
+105.318756,61.52401,L2,red,Phentermine,East Europe
+105.318756,61.52401,L2,red,Modafinil,East Europe
+105.318756,61.52401,L2,red,Oxazepam,East Europe
+105.318756,61.52401,L2,red,Methyl ether,East Europe
+105.318756,61.52401,L2,red,Synthetic Cannabinoid,East Europe
+105.318756,61.52401,L2,red,Extract from Opium poppy,East Europe
+105.318756,61.52401,L2,red,UR-144,East Europe
+105.318756,61.52401,L2,red,HU-210,East Europe
+105.318756,61.52401,L2,red,Cathinone,East Europe
+105.318756,61.52401,L2,red,Anabolic steroids,East Europe
+105.318756,61.52401,L2,red,AB-PINACA,East Europe
+105.318756,61.52401,L2,red,Phenylpiperazine,East Europe
+105.318756,61.52401,L2,red,Methanone,East Europe
+105.318756,61.52401,L2,red,Amfepramone Hydrochloride,East Europe
+105.318756,61.52401,L2,red,Dextromethorphan,East Europe
+31.16558,48.379433,L2,red,Acetylated Opium,East Europe
+25.48583,42.733883,L2,red,Heroin,Southeast Europe
+15.2,45.1,L3,red,Heroin,Southeast Europe
+21.005859,44.016521,L4,red,Heroin,Southeast Europe
+25.48583,42.733883,L2,red,Cocaine,Southeast Europe
+15.2,45.1,L3,red,Cocaine,Southeast Europe
+21.005859,44.016521,L4,red,Cocaine,Southeast Europe
+25.48583,42.733883,L2,red,Cannabis resin,Southeast Europe
+15.2,45.1,L3,red,Cannabis resin,Southeast Europe
+21.005859,44.016521,L4,red,Cannabis resin,Southeast Europe
+25.48583,42.733883,L2,red,Cannabis Herb (Marijuana),Southeast Europe
+15.2,45.1,L3,red,Cannabis Herb (Marijuana),Southeast Europe
+21.005859,44.016521,L4,red,Cannabis Herb (Marijuana),Southeast Europe
+25.48583,42.733883,L2,red,Ecstasy,Southeast Europe
+15.2,45.1,L3,red,Ecstasy,Southeast Europe
+21.005859,44.016521,L4,red,Ecstasy,Southeast Europe
+25.48583,42.733883,L2,red,Pseudoephedrine,Southeast Europe
+21.005859,44.016521,L2,red,Cannabis Plants,Southeast Europe
+21.005859,44.016521,L2,red,Cannabis Plants,Southeast Europe
+25.48583,42.733883,L2,red,Opium,Southeast Europe
+25.48583,42.733883,L2,red,Morphine,Southeast Europe
+25.48583,42.733883,L2,red,LSD,Southeast Europe
+21.005859,44.016521,L3,red,LSD,Southeast Europe
+21.005859,44.016521,L3,red,LSD,Southeast Europe
+21.005859,44.016521,L2,red,Psilocybin (mushrooms),Southeast Europe
+25.48583,42.733883,L2,red,Amphetamine,Southeast Europe
+15.2,45.1,L3,red,Amphetamine,Southeast Europe
+21.005859,44.016521,L4,red,Amphetamine,Southeast Europe
+25.48583,42.733883,L2,red,Ketamine,Southeast Europe
+21.005859,44.016521,L2,red,Tramadol,Southeast Europe
+25.48583,42.733883,L2,red,Clonazepam,Southeast Europe
+21.005859,44.016521,L3,red,Clonazepam,Southeast Europe
+21.005859,44.016521,L3,red,Clonazepam,Southeast Europe
+25.48583,42.733883,L2,red,Phenobarbital,Southeast Europe
+25.48583,42.733883,L2,red,Thiopropamine,Southeast Europe
+25.48583,42.733883,L2,red,5F-APINACA, 5F-AKB-48,Southeast Europe
+25.48583,42.733883,L2,red,MDMB-CHMICA,Southeast Europe
+25.48583,42.733883,L2,red,Khat,Southeast Europe
+25.48583,42.733883,L2,red,CUMYL-5F-PINACA,Southeast Europe
+25.48583,42.733883,L2,red,AB-CHMINACA,Southeast Europe
+25.48583,42.733883,L2,red,5F-ADB,Southeast Europe
+25.48583,42.733883,L2,red,MDMB-CHMCZCA,Southeast Europe
+25.48583,42.733883,L2,red,Ethylphenidate,Southeast Europe
+25.48583,42.733883,L2,red,4-MEC,Southeast Europe
+25.48583,42.733883,L2,red,PMK-glycidate,Southeast Europe
+25.48583,42.733883,L2,red,XLR-11,Southeast Europe
+25.48583,42.733883,L2,red,APAA,Southeast Europe
+24.96676,45.943161,L2,red,Benzodiazepine,Southeast Europe
+14.550072,47.516231,L2,red,Heroin,West & Central Europe
+33.429859,35.126413,L3,red,Heroin,West & Central Europe
+15.472962,49.817492,L4,red,Heroin,West & Central Europe
+15.472962,49.817492,L5,red,Heroin,West & Central Europe
+9.501785,56.26392,L6,red,Heroin,West & Central Europe
+21.824312,39.074208,L7,red,Heroin,West & Central Europe
+23.881275,55.169438,L8,red,Heroin,West & Central Europe
+-8.224454,39.399872,L9,red,Heroin,West & Central Europe
+14.995463,46.151241,L10,red,Heroin,West & Central Europe
+2.213749,46.227638,L10,red,Heroin,West & Central Europe
+-3.74922,40.463667,L11,red,Heroin,West & Central Europe
+14.550072,47.516231,L2,red,Cocaine,West & Central Europe
+33.429859,35.126413,L3,red,Cocaine,West & Central Europe
+15.472962,49.817492,L4,red,Cocaine,West & Central Europe
+15.472962,49.817492,L5,red,Cocaine,West & Central Europe
+9.501785,56.26392,L6,red,Cocaine,West & Central Europe
+25.748151,61.92411,L7,red,Cocaine,West & Central Europe
+23.881275,55.169438,L8,red,Cocaine,West & Central Europe
+14.375416,35.937496,L9,red,Cocaine,West & Central Europe
+-8.224454,39.399872,L10,red,Cocaine,West & Central Europe
+19.699024,48.669026,L11,red,Cocaine,West & Central Europe
+14.995463,46.151241,L12,red,Cocaine,West & Central Europe
+-3.74922,40.463667,L13,red,Cocaine,West & Central Europe
+14.550072,47.516231,L2,red,Cannabis resin,West & Central Europe
+33.429859,35.126413,L3,red,Cannabis resin,West & Central Europe
+15.472962,49.817492,L4,red,Cannabis resin,West & Central Europe
+15.472962,49.817492,L5,red,Cannabis resin,West & Central Europe
+9.501785,56.26392,L6,red,Cannabis resin,West & Central Europe
+25.748151,61.92411,L7,red,Cannabis resin,West & Central Europe
+23.881275,55.169438,L8,red,Cannabis resin,West & Central Europe
+14.375416,35.937496,L9,red,Cannabis resin,West & Central Europe
+-8.224454,39.399872,L10,red,Cannabis resin,West & Central Europe
+-3.74922,40.463667,L11,red,Cannabis resin,West & Central Europe
+14.550072,47.516231,L2,red,Cannabis Herb (Marijuana),West & Central Europe
+33.429859,35.126413,L3,red,Cannabis Herb (Marijuana),West & Central Europe
+15.472962,49.817492,L4,red,Cannabis Herb (Marijuana),West & Central Europe
+15.472962,49.817492,L5,red,Cannabis Herb (Marijuana),West & Central Europe
+9.501785,56.26392,L6,red,Cannabis Herb (Marijuana),West & Central Europe
+25.748151,61.92411,L7,red,Cannabis Herb (Marijuana),West & Central Europe
+23.881275,55.169438,L8,red,Cannabis Herb (Marijuana),West & Central Europe
+14.375416,35.937496,L9,red,Cannabis Herb (Marijuana),West & Central Europe
+-8.224454,39.399872,L10,red,Cannabis Herb (Marijuana),West & Central Europe
+-3.74922,40.463667,L11,red,Cannabis Herb (Marijuana),West & Central Europe
+14.550072,47.516231,L2,red,Ecstasy,West & Central Europe
+33.429859,35.126413,L3,red,Ecstasy,West & Central Europe
+15.472962,49.817492,L4,red,Ecstasy,West & Central Europe
+15.472962,49.817492,L5,red,Ecstasy,West & Central Europe
+9.501785,56.26392,L6,red,Ecstasy,West & Central Europe
+25.748151,61.92411,L7,red,Ecstasy,West & Central Europe
+23.881275,55.169438,L8,red,Ecstasy,West & Central Europe
+14.375416,35.937496,L9,red,Ecstasy,West & Central Europe
+-8.224454,39.399872,L10,red,Ecstasy,West & Central Europe
+14.995463,46.151241,L11,red,Ecstasy,West & Central Europe
+-3.74922,40.463667,L12,red,Ecstasy,West & Central Europe
+-8.224454,39.399872,L2,red,Cannabis seeds,West & Central Europe
+-3.74922,40.463667,L3,red,Cannabis seeds,West & Central Europe
+14.550072,47.516231,L2,red,Cannabis Plants,West & Central Europe
+33.429859,35.126413,L3,red,Cannabis Plants,West & Central Europe
+15.472962,49.817492,L4,red,Cannabis Plants,West & Central Europe
+15.472962,49.817492,L5,red,Cannabis Plants,West & Central Europe
+9.501785,56.26392,L6,red,Cannabis Plants,West & Central Europe
+-8.224454,39.399872,L7,red,Cannabis Plants,West & Central Europe
+-3.74922,40.463667,L8,red,Cannabis Plants,West & Central Europe
+8.227512,46.818188,L9,red,Cannabis Plants,West & Central Europe
+14.550072,47.516231,L2,red,Opium,West & Central Europe
+14.550072,47.516231,L2,red,Methamphetamine,West & Central Europe
+33.429859,35.126413,L3,red,Methamphetamine,West & Central Europe
+15.472962,49.817492,L4,red,Methamphetamine,West & Central Europe
+15.472962,49.817492,L5,red,Methamphetamine,West & Central Europe
+25.748151,61.92411,L6,red,Methamphetamine,West & Central Europe
+23.881275,55.169438,L7,red,Methamphetamine,West & Central Europe
+19.699024,48.669026,L8,red,Methamphetamine,West & Central Europe
+-3.74922,40.463667,L9,red,Methamphetamine,West & Central Europe
+-3.74922,40.463667,L2,red,Coca paste,West & Central Europe
+14.550072,47.516231,L2,red,LSD,West & Central Europe
+15.472962,49.817492,L3,red,LSD,West & Central Europe
+15.472962,49.817492,L4,red,LSD,West & Central Europe
+9.501785,56.26392,L5,red,LSD,West & Central Europe
+25.748151,61.92411,L6,red,LSD,West & Central Europe
+-8.224454,39.399872,L7,red,LSD,West & Central Europe
+-3.74922,40.463667,L8,red,LSD,West & Central Europe
+21.824312,39.074208,L2,red,2C-B,West & Central Europe
+-3.74922,40.463667,L2,red,Coca leaf,West & Central Europe
+25.748151,61.92411,L2,red,Other,West & Central Europe
+-3.74922,40.463667,L3,red,Other,West & Central Europe
+8.227512,46.818188,L4,red,Other,West & Central Europe
+-8.224454,39.399872,L2,red,Hallucinogens,West & Central Europe
+8.227512,46.818188,L3,red,Hallucinogens,West & Central Europe
+21.824312,39.074208,L2,red,DOC,West & Central Europe
+-3.74922,40.463667,L2,red,Psilocybin (mushrooms),West & Central Europe
+14.550072,47.516231,L2,red,Amphetamine,West & Central Europe
+33.429859,35.126413,L3,red,Amphetamine,West & Central Europe
+15.472962,49.817492,L4,red,Amphetamine,West & Central Europe
+15.472962,49.817492,L5,red,Amphetamine,West & Central Europe
+9.501785,56.26392,L6,red,Amphetamine,West & Central Europe
+25.748151,61.92411,L7,red,Amphetamine,West & Central Europe
+23.881275,55.169438,L8,red,Amphetamine,West & Central Europe
+-8.224454,39.399872,L9,red,Amphetamine,West & Central Europe
+14.995463,46.151241,L10,red,Amphetamine,West & Central Europe
+-3.74922,40.463667,L11,red,Amphetamine,West & Central Europe
+-3.74922,40.463667,L2,red,Mephedrone,West & Central Europe
+21.824312,39.074208,L2,red,Ketamine,West & Central Europe
+-3.74922,40.463667,L3,red,Ketamine,West & Central Europe
+25.748151,61.92411,L2,red,Bromazepam,West & Central Europe
+25.748151,61.92411,L2,red,Diazepam,West & Central Europe
+25.748151,61.92411,L2,red,Alprazolam (Xanax),West & Central Europe
+-3.74922,40.463667,L3,red,Alprazolam (Xanax),West & Central Europe
+-8.224454,39.399872,L2,red,Methadone,West & Central Europe
+-3.74922,40.463667,L3,red,Methadone,West & Central Europe
+14.550072,47.516231,L2,red,Tramadol,West & Central Europe
+25.748151,61.92411,L3,red,Tramadol,West & Central Europe
+21.824312,39.074208,L4,red,Tramadol,West & Central Europe
+14.375416,35.937496,L5,red,Tramadol,West & Central Europe
+14.550072,47.516231,L2,red,Buprenorphine,West & Central Europe
+25.748151,61.92411,L3,red,Buprenorphine,West & Central Europe
+-3.74922,40.463667,L2,red,Cannabis Oil,West & Central Europe
+25.748151,61.92411,L2,red,Clonazepam,West & Central Europe
+-3.74922,40.463667,L3,red,Clonazepam,West & Central Europe
+9.501785,56.26392,L2,red,Non-specified NPS,West & Central Europe
+14.550072,47.516231,L2,red,Cannabis,West & Central Europe
+21.824312,39.074208,L3,red,Cannabis,West & Central Europe
+14.995463,46.151241,L4,red,Cannabis,West & Central Europe
+-3.74922,40.463667,L5,red,Cannabis,West & Central Europe
+21.824312,39.074208,L2,red,AB-FUBINACA,West & Central Europe
+25.748151,61.92411,L2,red,Nitrazepam,West & Central Europe
+21.824312,39.074208,L2,red,JWH-018,West & Central Europe
+21.824312,39.074208,L2,red,Synthetic Cannabinoid,West & Central Europe
+-3.74922,40.463667,L3,red,Synthetic Cannabinoid,West & Central Europe
+25.748151,61.92411,L2,red,Anabolic steroids,West & Central Europe
+21.824312,39.074208,L2,red,MDMB-CHMICA,West & Central Europe
+14.550072,47.516231,L2,red,Khat,West & Central Europe
+25.748151,61.92411,L3,red,Khat,West & Central Europe
+14.375416,35.937496,L4,red,Khat,West & Central Europe
+-3.74922,40.463667,L5,red,Khat,West & Central Europe
+21.824312,39.074208,L2,red,CUMYL-5F-PINACA,West & Central Europe
+21.824312,39.074208,L2,red,5F-ADB,West & Central Europe
+25.748151,61.92411,L2,red,Ethylphenidate,West & Central Europe
+15.472962,49.817492,L2,red,4-MEC,West & Central Europe
+15.472962,49.817492,L3,red,4-MEC,West & Central Europe
+21.824312,39.074208,L4,red,4-MEC,West & Central Europe
+14.550072,47.516231,L2,red,Substitol (slow release Morphine),West & Central Europe
+33.429859,35.126413,L2,red,Synthetics,West & Central Europe
+15.472962,49.817492,L2,red,CHLORMETHCATHINON,West & Central Europe
+15.472962,49.817492,L3,red,CHLORMETHCATHINON,West & Central Europe
+15.472962,49.817492,L2,red,25B-NBOMe,West & Central Europe
+15.472962,49.817492,L3,red,25B-NBOMe,West & Central Europe
+15.472962,49.817492,L2,red,4-CMC,West & Central Europe
+15.472962,49.817492,L3,red,4-CMC,West & Central Europe
+25.748151,61.92411,L2,red,GBL,West & Central Europe
+25.748151,61.92411,L2,red,METHANDROSTENOLONE,West & Central Europe
+25.748151,61.92411,L2,red,Fentanyl,West & Central Europe
+21.824312,39.074208,L2,red,4-Fluoroamphetamine,West & Central Europe
+21.824312,39.074208,L2,red,6-MAPB,West & Central Europe
+21.824312,39.074208,L2,red,AM-2201,West & Central Europe
+21.824312,39.074208,L2,red,MDPV,West & Central Europe
+21.824312,39.074208,L2,red,1-phenethyl-4-hydroxypiperidine,West & Central Europe
+21.824312,39.074208,L2,red,bk_MDEA,West & Central Europe
+21.824312,39.074208,L2,red,4-CI-a-PVP,West & Central Europe
+21.824312,39.074208,L2,red,Amphetamine-Ketamine Mix,West & Central Europe
+21.824312,39.074208,L2,red,Ephylone,West & Central Europe
+21.824312,39.074208,L2,red,4-Chloromethcathinone,West & Central Europe
+21.824312,39.074208,L2,red,MDPA,West & Central Europe
+21.824312,39.074208,L2,red,2-MMC,West & Central Europe
+21.824312,39.074208,L2,red,para-Methoxy-N-methylamphetamine,West & Central Europe
+-8.224454,39.399872,L2,red,Cannabis Pollen,West & Central Europe
+-3.74922,40.463667,L3,red,Cannabis Pollen,West & Central Europe
+-3.74922,40.463667,L2,red,Mescaline,West & Central Europe
+-3.74922,40.463667,L2,red,Medazepam,West & Central Europe
+-3.74922,40.463667,L2,red,MDEA,West & Central Europe
+8.227512,46.818188,L2,red,Opiates,West & Central Europe
+8.227512,46.818188,L2,red,Non-specified stimulants,West & Central Europe
+174.885971,-40.900557,L2,red,Heroin,Oceania
+174.885971,-40.900557,L2,red,Cocaine,Oceania
+174.885971,-40.900557,L2,red,Cannabis Herb (Marijuana),Oceania
+174.885971,-40.900557,L2,red,Ecstasy,Oceania
+174.885971,-40.900557,L2,red,Pseudoephedrine,Oceania
+174.885971,-40.900557,L2,red,Cannabis Plants,Oceania
+174.885971,-40.900557,L2,red,Opium,Oceania
+174.885971,-40.900557,L2,red,Methamphetamine,Oceania
+174.885971,-40.900557,L2,red,Non-specified pharmaceuticals,Oceania
+174.885971,-40.900557,L2,red,Morphine,Oceania
+174.885971,-40.900557,L2,red,LSD,Oceania
+174.885971,-40.900557,L2,red,2C-B,Oceania
+174.885971,-40.900557,L2,red,Coca leaf,Oceania
+174.885971,-40.900557,L2,red,Other,Oceania
+174.885971,-40.900557,L2,red,Hydrochloric Acid,Oceania
+174.885971,-40.900557,L2,red,Hallucinogens,Oceania
+174.885971,-40.900557,L2,red,Sulphuric Acid,Oceania
+174.885971,-40.900557,L2,red,Psilocybin (mushrooms),Oceania
+174.885971,-40.900557,L2,red,Amphetamine,Oceania
+174.885971,-40.900557,L2,red,Mephedrone,Oceania
+174.885971,-40.900557,L2,red,Methylphenidate,Oceania
+174.885971,-40.900557,L2,red,Liquid cocaine,Oceania
+174.885971,-40.900557,L2,red,Acetone/Ethyl Ether,Oceania
+174.885971,-40.900557,L2,red,Ketamine,Oceania
+174.885971,-40.900557,L2,red,Ephedrine,Oceania
+174.885971,-40.900557,L2,red,Methadone,Oceania
+174.885971,-40.900557,L2,red,Tramadol,Oceania
+174.885971,-40.900557,L2,red,Buprenorphine,Oceania
+174.885971,-40.900557,L2,red,Non-specified NPS,Oceania
+174.885971,-40.900557,L2,red,Cannabis,Oceania
+174.885971,-40.900557,L2,red,Opium Poppy,Oceania
+174.885971,-40.900557,L2,red,Acetic Anhydride,Oceania
+174.885971,-40.900557,L2,red,Zolpidem,Oceania
+174.885971,-40.900557,L2,red,Hydrocodone,Oceania
+174.885971,-40.900557,L2,red,Oxycodone,Oceania
+174.885971,-40.900557,L2,red,Other precursors,Oceania
+174.885971,-40.900557,L2,red,Dimethyltryptamine (DMT),Oceania
+174.885971,-40.900557,L2,red,Codeine,Oceania
+174.885971,-40.900557,L2,red,Phenobarbital,Oceania
+174.885971,-40.900557,L2,red,Phentermine,Oceania
+174.885971,-40.900557,L2,red,Synthetic Cannabinoid,Oceania
+174.885971,-40.900557,L2,red,Anabolic steroids,Oceania
+174.885971,-40.900557,L2,red,Khat,Oceania
+174.885971,-40.900557,L2,red,Benzodiazepine,Oceania
+174.885971,-40.900557,L2,red,Fentanyl,Oceania
+174.885971,-40.900557,L2,red,Mescaline,Oceania
+174.885971,-40.900557,L2,red,Benzylpiperazine,Oceania
+174.885971,-40.900557,L2,red,Phenethylamines,Oceania
+174.885971,-40.900557,L2,red,GABA,Oceania
+174.885971,-40.900557,L2,red,Zopiclone,Oceania
+174.885971,-40.900557,L2,red,GHB/GBL,Oceania
+174.885971,-40.900557,L2,red,Liquid methamphetamine,Oceania
+174.885971,-40.900557,L2,red,Hypophosphorous Acid,Oceania
+174.885971,-40.900557,L2,red,MDA,Oceania
+174.885971,-40.900557,L2,red,Iodine,Oceania
+174.885971,-40.900557,L2,red,Hydromorphone,Oceania
+174.885971,-40.900557,L2,red,Sodium hydroxide,Oceania
+174.885971,-40.900557,L2,red,Phosphorous Acid,Oceania
+174.885971,-40.900557,L2,red,4-HO-DiPT,Oceania
+174.885971,-40.900557,L2,red,Tapentadol,Oceania
+174.885971,-40.900557,L2,red,Methylone,Oceania
+174.885971,-40.900557,L2,red,Fuelite,Oceania
+174.885971,-40.900557,L2,red,Toluene,Oceania
+174.885971,-40.900557,L2,red,Potassium Permanganate,Oceania

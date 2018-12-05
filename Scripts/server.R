@@ -46,6 +46,10 @@ data <- left_join(data, match_and_coords, by = c("DESTINATION_COUNTRY" = "COUNTR
 names(match_and_coords) <- c("country", "lat", "long")
 coords <- match_and_coords
 
+arrow_chart <- read.csv("../data/arrow_chart.csv", stringsAsFactors = FALSE)
+arrow_chart$long <- as.numeric(arrow_chart$long)
+arrow_chart$lat <- as.numeric(arrow_chart$lat)
+
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
 #maptile <- "https://api.mapbox.com/v4/mapbox.emerald/page.html?access_token=pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA"
 
@@ -218,10 +222,38 @@ shinyServer(function(input, output) {
       
   })
   
-  ###
+
   
   output$most_country_map <- renderLeaflet({
-    leaflet() %>%
-      addTiles()
+    
+  
+    leaflet(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,]) %>%
+      addTiles() %>%
+      addPolylines(lat = ~lat,
+                   lng = ~long,
+                   color = "red",
+                   group = "current_lines")
   })
-})
+   
+  
+  observeEvent(input$subregion, {
+    leafletProxy("most_country_map") %>%
+      clearGroup("current_lines") %>%
+      addPolylines(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,],
+                   lat = ~lat,
+                   lng = ~long,
+                   color = "red",
+                   group = "current_lines")})
+
+  observeEvent(input$drug, {
+    leafletProxy("most_country_map") %>%
+      clearGroup("current_lines") %>%
+      addPolylines(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,],
+                   lat = ~lat,
+                   lng = ~long,
+                   color = "red",
+                   group = "current_lines")})
+
+
+    
+  })
