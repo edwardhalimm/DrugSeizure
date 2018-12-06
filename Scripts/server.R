@@ -66,30 +66,24 @@ shinyServer(function(input, output) {
       addTiles() %>%
       setView(lat = 49.81749 ,lng = 15.47296,zoom = 3) %>%
       addCircles( lng = input_data$LNG_COUNTRY, lat = input_data$LAT_COUNTRY,
-                   weight = 1, 
-                   radius = input_data$AMOUNT / 5,
-                   color = "#FF2500",
-                   popup = paste("Country: ", input_data$COUNTRY,
+                  weight = 1, 
+                  radius = input_data$AMOUNT / 5,
+                  color = "#FF2500",
+                  popup = paste("Country: ", input_data$COUNTRY,
                                 "<br>Drug Name: ", input_data$DRUG_NAME,
                                 "<br>Amount: ", input_data$AMOUNT, input_data$DRUG_UNIT)) %>%
-    #Button to zoom out
-     addEasyButton((easyButton(
-       icon = "fa-globe", title = "Zoom to Level 1",
-       onClick = JS("function(btn, map){map.setZoom(1); }")
-     ))) %>%
-     #Button to locate user
-     addEasyButton(easyButton(
-       icon = "fa-crosshairs", title = "Locate Me",
-       onClick = JS("function(btn,map){ map.locate({setView:true}); }")
-     ))
+      #Button to zoom out
+      addEasyButton((easyButton(
+        icon = "fa-globe", title = "Zoom to Level 1",
+        onClick = JS("function(btn, map){map.setZoom(1); }")
+      ))) %>%
+      #Button to locate user
+      addEasyButton(easyButton(
+        icon = "fa-crosshairs", title = "Locate Me",
+        onClick = JS("function(btn,map){ map.locate({setView:true}); }")
+      ))
   })
-  
-  # delete?
-  output$relationship_map <- renderLeaflet({
-    leaflet() %>%
-      addTiles()
-  })
-  
+
   
   output$relationship_map <- renderLeaflet({
     
@@ -215,13 +209,13 @@ shinyServer(function(input, output) {
       
   })
   
-  drug_data <- data
+ 
   get_filtered <- function(current_country, relationship, current_drug) {
-    
+    adrian_drug_data <- data
     if (current_drug == "ALL"){ 
-      selected_country <- filter(drug_data, COUNTRY == current_country)
+      selected_country <- filter(adrian_drug_data, COUNTRY == current_country)
     } else {
-      selected_country <- filter(drug_data, COUNTRY == current_country & DRUG_NAME == current_drug)
+      selected_country <- filter(adrian_drug_data, COUNTRY == current_country & DRUG_NAME == current_drug)
     }
     
     if(relationship == "Country of Origin") {
@@ -249,7 +243,7 @@ shinyServer(function(input, output) {
   
   
   get_country_plot <- function(input) {
-    data_for_plot <- get_filtered(input$country, input$relationship, input$drug)
+    data_for_plot <- get_filtered(input$country, input$relationship, input$drug_name_adrian)
     my_angle <- numeric()
     if(input$angle == "Vertical") {
       my_angle <- 90
