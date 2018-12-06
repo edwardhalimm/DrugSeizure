@@ -14,17 +14,18 @@ library(shiny)
 library(shinydashboard)
 library(graphics)
 library(googleVis)
+library(ggplot2)
 
 
 #Read in original data set and set useful columns
-data <- suppressWarnings(read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
+data <- suppressWarnings(read_xlsx("data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
                       DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
 
 #Read in coordinates data sets
-coords <- read.csv("../data/coords.csv", stringsAsFactors = FALSE)
+coords <- read.csv("data/coords.csv", stringsAsFactors = FALSE)
 names(coords) <- c("iso2c", "lat", "lng", "name")
-match_table <- read.csv("../data/country_codes.csv", stringsAsFactors = FALSE)
+match_table <- read.csv("data/country_codes.csv", stringsAsFactors = FALSE)
 match_table <- select(match_table,country_name,iso2c)
 
 #Join coordinate columns to data
@@ -93,8 +94,8 @@ shinyServer(function(input, output) {
   
   output$relationship_map <- renderLeaflet({
     
-    drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
-    location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
+    drug_data <- read_xlsx("data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
+    location_data <- read_xlsx("data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
     df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE)
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
@@ -138,11 +139,11 @@ shinyServer(function(input, output) {
   #Subregion Data
 
   
-  subregionCoords <- read.csv("../data/subregion_coords.csv", stringsAsFactors = FALSE)
+  subregionCoords <- read.csv("data/subregion_coords.csv", stringsAsFactors = FALSE)
   
   #Icon
   skullIcon <- iconList(
-    skull = makeIcon("skull.png", "../data/skull.png", 40, 40)
+    skull = makeIcon("skull.png", "data/skull.png", 40, 40)
   )
   
   #Amount of drug seizure each subregion

@@ -1,0 +1,12 @@
+name: Scripts
+title: Scripts
+username:
+account: janette-cwk
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 606428
+bundleId: 1745092
+url: https://janette-cwk.shinyapps.io/Scripts/
+when: 1544084700.91318
+asMultiple: FALSE
+asStatic: FALSE
