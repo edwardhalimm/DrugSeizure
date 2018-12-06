@@ -57,18 +57,21 @@ coords <- match_and_coords
 
 
 shinyServer(function(input, output) {
+  getData <- reactive({
+    input_data <- filter(data, DRUG_NAME == input$drug)
+  })
   output$seizures_map <- renderLeaflet({
-    
+    input_data <- getData()
     leaflet() %>% 
       addTiles() %>%
-      setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
-      addCircles( lng = data$LNG_COUNTRY, lat = data$LAT_COUNTRY,
+      setView(lat = 49.81749 ,lng = 15.47296,zoom = 3) %>%
+      addCircles( lng = input_data$LNG_COUNTRY, lat = input_data$LAT_COUNTRY,
                    weight = 1, 
-                   radius = data$AMOUNT / 10,
-                   color = "#FFA500",
-                   popup = paste("Country: ", data$COUNTRY,
-                                "<br>Drug Name: ", data$DRUG_NAME,
-                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)) %>%
+                   radius = input_data$AMOUNT / 5,
+                   color = "#FF2500",
+                   popup = paste("Country: ", input_data$COUNTRY,
+                                "<br>Drug Name: ", input_data$DRUG_NAME,
+                                "<br>Amount: ", input_data$AMOUNT, input_data$DRUG_UNIT)) %>%
     #Button to zoom out
      addEasyButton((easyButton(
        icon = "fa-globe", title = "Zoom to Level 1",
@@ -80,26 +83,6 @@ shinyServer(function(input, output) {
        onClick = JS("function(btn,map){ map.locate({setView:true}); }")
      ))
   })
-  #Action on selectInput
-  # observeEvent(input$subregion, {
-  #     #Clear the map
-  #     leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
-  #     #using user input
-  #     position = which(data$SUBREGION == input$subregion)
-  #     #Display new circles according to user input
-  #     leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
-  #                                                 lat = data$LAT_COUNTRY[position], weight = 1, 
-  #                                                 radius = data$AMOUNT / 10, color = "#FFA500",
-  #                                                 popup = paste("Country: ", data$COUNTRY,
-  #                                                               "<br>Drug Name: ", data$DRUG_NAME,
-  #                                                               "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
-  #                                                 )
-<<<<<<< HEAD
-  #})
-=======
-  # })
-  
->>>>>>> 7adac61b154ab8a867ab2522703ccb02a7d13192
   
   # delete?
   output$relationship_map <- renderLeaflet({
