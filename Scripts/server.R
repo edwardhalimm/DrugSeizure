@@ -135,13 +135,13 @@ shinyServer(function(input, output) {
         leaflet() %>%
         addTiles() %>%
         addMarkers(popup="Producing Country") %>%
-        addAwesomeMarkers(lat = 2.4, lng = 1.4, icon = icon, popup="Seizure Country")
+        addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure Country")
       } else {
           df %>%
           leaflet() %>%
           addTiles() %>%
           addMarkers(popup="Producing Country") %>%
-          addAwesomeMarkers(lat = 2.7, lng = 3.4, icon = icon, popup="Seizure and Producing Country")
+          addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
       }
     
     
@@ -230,37 +230,78 @@ shinyServer(function(input, output) {
       
   })
   
-
-  
-  output$most_country_map <- renderLeaflet({
+  drug_data <- data
+  get_filtered <- function(current_country, relationship, current_drug) {
     
-    leaflet(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,]) %>%
-      addTiles() %>%
-      addPolylines(lat = ~lat,
-                   lng = ~long,
-                   color = "red",
-                   group = "current_lines")
-  })
-   
+    if (current_drug == "ALL"){ 
+      selected_country <- filter(drug_data, COUNTRY == current_country)
+    } else {
+      selected_country <- filter(drug_data, COUNTRY == current_country & DRUG_NAME == current_drug)
+    }
+    
+    if(relationship == "Country of Origin") {
+      df <- data.frame(COUNTRY = as.character(), PRODUCING_COUNTRY = as.character(), stringsAsFactors=FALSE) 
+      
+      for(row in 1:nrow(selected_country)) {
+        if(!is.na(selected_country$PRODUCING_COUNTRY[row]) & selected_country$PRODUCING_COUNTRY[row] != "Unknown") {
+          df[nrow(df)+1,] <- c(current_country, selected_country$PRODUCING_COUNTRY[row] %>% as.character())
+          
+        }
+      }
+      df
+    } else if (relationship == "Destination Country") {
+      df <- data.frame(COUNTRY = as.character(), DESTINATION_COUNTRY = as.character(), stringsAsFactors=FALSE)
+      
+      for(row in 1:nrow(selected_country)) {
+        if(!is.na(selected_country$DESTINATION_COUNTRY[row]) & selected_country$DESTINATION_COUNTRY[row] != "Unknown") {
+          df[nrow(df)+1,] <- c(current_country, selected_country$DESTINATION_COUNTRY[row] %>% as.character())
+          
+        }  
+      }
+      df
+    }
+  }
   
-  observeEvent(input$subregion, {
-    leafletProxy("most_country_map") %>%
-      clearGroup("current_lines") %>%
-      addPolylines(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,],
-                   lat = ~lat,
-                   lng = ~long,
-                   color = "red",
-                   group = "current_lines")})
-
-  observeEvent(input$drug, {
-    leafletProxy("most_country_map") %>%
-      clearGroup("current_lines") %>%
-      addPolylines(data = arrow_chart[arrow_chart$drug == input$drug & arrow_chart$subregion == input$subregion,],
-                   lat = ~lat,
-                   lng = ~long,
-                   color = "red",
-                   group = "current_lines")})
-
-
+  
+  get_country_plot <- function(input) {
+    data_for_plot <- get_filtered(input$country, input$relationship, input$drug)
+    my_angle <- numeric()
+    if(input$angle == "Vertical") {
+      my_angle <- 90
+    } else if (input$angle == "Horizontal") {
+      my_angle <- 0
+    }
+    
+    if (input$relationship == "Country of Origin") {
+      ggplot(data_for_plot, aes(x = PRODUCING_COUNTRY)) +
+        geom_bar(stat = "count", fill = "darkgreen") + 
+        labs(title = "Counts of Seizures for a Given Country Produced in or Destined for Another Country") +
+        theme(text = element_text(size=15),
+              axis.text.x = element_text(angle=my_angle, hjust=1),
+              plot.margin=unit(c(1,1,1.5,1.5),"cm")) 
+      
+    } else if (input$relationship == "Destination Country") {
+      ggplot(data_for_plot, aes(x = DESTINATION_COUNTRY)) +
+        geom_bar(stat = "count", fill = "orangered") + 
+        labs(title = "Counts of Seizures for a Given Country Produced in or Destined for Another Country") + 
+        theme(text = element_text(size=15),
+              axis.text.x = element_text(angle=my_angle, hjust=1),
+              plot.margin=unit(c(1,1,1.5,1.5),"cm")) 
+      
+    }
+  }
+  
+  
+  output$country_chart <- renderPlot({
+    
+    get_country_plot(input)
+    
+  })
+  
+  output$summary <- renderPrint({
+    "Navigate the draggable menu to investigate drug trafficking trends based on data from the United Nations Office on Drugs and Crime. NOTE: Data is not available for all countries."
+  })
+  
+  
     
   })
