@@ -46,9 +46,9 @@ data <- left_join(data, match_and_coords, by = c("DESTINATION_COUNTRY" = "COUNTR
 names(match_and_coords) <- c("country", "lat", "long")
 coords <- match_and_coords
 
-arrow_chart <- read.csv("../data/arrow_chart.csv", stringsAsFactors = FALSE)
-arrow_chart$long <- as.numeric(arrow_chart$long)
-arrow_chart$lat <- as.numeric(arrow_chart$lat)
+#arrow_chart <- read.csv("../data/arrow_chart.csv", stringsAsFactors = FALSE)
+#arrow_chart$long <- as.numeric(arrow_chart$long)
+#arrow_chart$lat <- as.numeric(arrow_chart$lat)
 
 
 # token <- pk.eyJ1IjoiamFuZXR0ZWN3ayIsImEiOiJjanA2ZHJwcW0wOHk3M3BvNmNlYWE2dGJ5In0.ZsZjug12tYHP1K_751NFWA
@@ -57,18 +57,21 @@ arrow_chart$lat <- as.numeric(arrow_chart$lat)
 
 
 shinyServer(function(input, output) {
+  getData <- reactive({
+    input_data <- filter(data, DRUG_NAME == input$drug)
+  })
   output$seizures_map <- renderLeaflet({
-    
+    input_data <- getData()
     leaflet() %>% 
       addTiles() %>%
-      setView(lat = 49.81749 ,lng = 15.47296,zoom = 6) %>%
-      addCircles( lng = data$LNG_COUNTRY, lat = data$LAT_COUNTRY,
+      setView(lat = 49.81749 ,lng = 15.47296,zoom = 3) %>%
+      addCircles( lng = input_data$LNG_COUNTRY, lat = input_data$LAT_COUNTRY,
                    weight = 1, 
-                   radius = data$AMOUNT / 10,
-                   color = "#FFA500",
-                   popup = paste("Country: ", data$COUNTRY,
-                                "<br>Drug Name: ", data$DRUG_NAME,
-                                "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)) %>%
+                   radius = input_data$AMOUNT / 5,
+                   color = "#FF2500",
+                   popup = paste("Country: ", input_data$COUNTRY,
+                                "<br>Drug Name: ", input_data$DRUG_NAME,
+                                "<br>Amount: ", input_data$AMOUNT, input_data$DRUG_UNIT)) %>%
     #Button to zoom out
      addEasyButton((easyButton(
        icon = "fa-globe", title = "Zoom to Level 1",
@@ -80,22 +83,6 @@ shinyServer(function(input, output) {
        onClick = JS("function(btn,map){ map.locate({setView:true}); }")
      ))
   })
-  #Action on selectInput
-  # observeEvent(input$subregion, {
-  #     #Clear the map
-  #     leafletProxy("seizures_map") %>% clearShapes() %>% clearPopups()
-  #     #using user input
-  #     position = which(data$SUBREGION == input$subregion)
-  #     #Display new circles according to user input
-  #     leafletProxy("seizures_map") %>% addCircles(lng = data$LNG_COUNTRY[position], 
-  #                                                 lat = data$LAT_COUNTRY[position], weight = 1, 
-  #                                                 radius = data$AMOUNT / 10, color = "#FFA500",
-  #                                                 popup = paste("Country: ", data$COUNTRY,
-  #                                                               "<br>Drug Name: ", data$DRUG_NAME,
-  #                                                               "<br>Amount: ", data$AMOUNT, data$DRUG_UNIT)
-  #                                                 )
-  # })
-  
   
   # delete?
   output$relationship_map <- renderLeaflet({
@@ -109,25 +96,25 @@ shinyServer(function(input, output) {
     drug_data <- read_xlsx("../data/IDSReport.xlsx", sheet = 6, col_names = TRUE)
     location_data <- read_xlsx("../data/Location_longitude_latitude.xlsx", col_names = TRUE)
     val <- 0
-    df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE) 
+    df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE)
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
     as.data.frame(selected_country)
-    
+
     coordinates <- filter(location_data, input$country2 == name)
     select_lat <- coordinates$latitude[1]
     select_lng <- coordinates$longitude[1]
-    
-    
+
+
     for(row in 1:nrow(selected_country)) {
       if(!is.na(selected_country$PRODUCING_COUNTRY[row]) & selected_country$PRODUCING_COUNTRY[row] != "Unknown") {
         coordinates <- filter(location_data, selected_country$PRODUCING_COUNTRY[row] == name)
         df[nrow(df)+1,] <- c(coordinates$latitude[1], coordinates$longitude[1])
         if (input$country2== selected_country$PRODUCING_COUNTRY[row]) {
-          val <- 1 
+          val <- 1
         }
       }
     }
-    
+
     icon <- awesomeIcons(icon = 'flag', iconColor = 'red')
       if(val == 0) {
         na.omit(df)
@@ -143,9 +130,9 @@ shinyServer(function(input, output) {
           addMarkers(popup="Producing Country") %>%
           addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
       }
-    
-    
-     
+
+
+
   })
   
   #Subregion Data
@@ -179,24 +166,22 @@ shinyServer(function(input, output) {
   
   #Subregion Set View LATITUDE
   view_latitude <- reactive({
-    finding_lat <- filter(subregionCoords, subregionCoords$subregion == "Caribbean")
+    finding_lat <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
     the_lat <- finding_lat$latitude
-    the_lat
   })
   
   #Subregion Set View LONGITUDE
   view_longitude <- reactive({
-    finding_long <- filter(subregionCoords, subregionCoords$subregion == "Caribbean")
+    finding_long <- filter(subregionCoords, subregionCoords$subregion == input$subregion)
     the_long <- finding_long$longitude
-    the_long
   })
   
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
 
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
-    num_long <- paste(view_longitude())
-    num_lat <- paste(view_latitude())
+    num_long <- view_longitude()
+    num_lat <- view_latitude()
  
     leaflet(data = subregionCoords[1:13,]) %>% 
       
