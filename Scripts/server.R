@@ -20,7 +20,7 @@ library(ggplot2)
 #Read in original data set and set useful columns
 data <- suppressWarnings(read_xlsx("data/IDSReport.xlsx", sheet = 6, col_names = TRUE))
 data <- select(data, SUBREGION , COUNTRY, SEIZURE_DATE, DRUG_NAME, AMOUNT, DRUG_UNIT, PRODUCING_COUNTRY, 
-                      DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
+               DEPARTURE_COUNTRY, DESTINATION_COUNTRY)
 
 #Read in coordinates data sets
 coords <- read.csv("data/coords.csv", stringsAsFactors = FALSE)
@@ -84,7 +84,13 @@ shinyServer(function(input, output) {
         onClick = JS("function(btn,map){ map.locate({setView:true}); }")
       ))
   })
-
+  
+  # delete?
+  output$relationship_map <- renderLeaflet({
+    leaflet() %>%
+      addTiles()
+  })
+  
   
   output$relationship_map <- renderLeaflet({
     
@@ -94,12 +100,12 @@ shinyServer(function(input, output) {
     df <- data.frame(lat=numeric(0), lng=numeric(0), stringsAsFactors=FALSE)
     selected_country <- filter(drug_data, input$country2 == COUNTRY)
     as.data.frame(selected_country)
-
+    
     coordinates <- filter(location_data, input$country2 == name)
     select_lat <- coordinates$latitude[1]
     select_lng <- coordinates$longitude[1]
-
-
+    
+    
     for(row in 1:nrow(selected_country)) {
       if(!is.na(selected_country$PRODUCING_COUNTRY[row]) & selected_country$PRODUCING_COUNTRY[row] != "Unknown") {
         coordinates <- filter(location_data, selected_country$PRODUCING_COUNTRY[row] == name)
@@ -109,29 +115,29 @@ shinyServer(function(input, output) {
         }
       }
     }
-
+    
     icon <- awesomeIcons(icon = 'flag', iconColor = 'red')
-      if(val == 0) {
-        na.omit(df)
-        df %>%
+    if(val == 0) {
+      na.omit(df)
+      df %>%
         leaflet() %>%
         addTiles() %>%
         addMarkers(popup="Producing Country") %>%
         addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure Country")
-      } else {
-          df %>%
-          leaflet() %>%
-          addTiles() %>%
-          addMarkers(popup="Producing Country") %>%
-          addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
-      }
-
-
-
+    } else {
+      df %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(popup="Producing Country") %>%
+        addAwesomeMarkers(lat = select_lat, lng = select_lng, icon = icon, popup="Seizure and Producing Country")
+    }
+    
+    
+    
   })
   
   #Subregion Data
-
+  
   
   subregionCoords <- read.csv("data/subregion_coords.csv", stringsAsFactors = FALSE)
   
@@ -148,14 +154,14 @@ shinyServer(function(input, output) {
   drug_type_count <- reactive({   
     drug_in_each_subregion <- filter(data, data$SUBREGION == input$subregion)
     drug_type_in_subregion <- filter(drug_in_each_subregion, drug_in_each_subregion$DRUG_NAME == input$drugType)
-
+    
     count_drug_in_subregion <- group_by(drug_type_in_subregion, DRUG_NAME) %>% 
       summarise(count = n())
-
+    
     number_of_the_drug <- count_drug_in_subregion$count
     number_of_the_drug
   })
-
+  
   #Number of total drug seizure in each subregion (There is this much of drug seizure in this subregion)
   content <- paste(sep = "<br/>", count_subregion$count)
   
@@ -173,11 +179,11 @@ shinyServer(function(input, output) {
   
   #Leaflet most_region_map
   output$most_region_map <- renderLeaflet({
-
+    
     drug_in_the_region <- paste("The number of ", input$drugType, " seizure in this region: ", drug_type_count(), sep="")
     num_long <- view_longitude()
     num_lat <- view_latitude()
- 
+    
     leaflet(data = subregionCoords[1:13,]) %>% 
       
       addTiles() %>% 
@@ -194,8 +200,8 @@ shinyServer(function(input, output) {
                                                "font-size" = "12px",
                                                "border-color" = "rgba(0,0,0,0.5)")),
                  popup = paste ("<b>", subregionCoords$subregion,"</b>", "<br>",
-                          "Amount of drug seizure in this region: ", content, "<br>", 
-                          drug_in_the_region)
+                                "Amount of drug seizure in this region: ", content, "<br>", 
+                                drug_in_the_region)
       ) %>%
       addEasyButton((easyButton(
         icon = "fa-globe", title = "Zoom out",
@@ -207,16 +213,16 @@ shinyServer(function(input, output) {
         primaryAreaUnit = "sqmeters",
         activeColor = "#3D535D",
         completedColor = "#7D4479")
-      
+    
   })
   
- 
+  drug_data <- data
   get_filtered <- function(current_country, relationship, current_drug) {
-    adrian_drug_data <- data
+    
     if (current_drug == "ALL"){ 
-      selected_country <- filter(adrian_drug_data, COUNTRY == current_country)
+      selected_country <- filter(drug_data, COUNTRY == current_country)
     } else {
-      selected_country <- filter(adrian_drug_data, COUNTRY == current_country & DRUG_NAME == current_drug)
+      selected_country <- filter(drug_data, COUNTRY == current_country & DRUG_NAME == current_drug)
     }
     
     if(relationship == "Country of Origin") {
@@ -244,7 +250,7 @@ shinyServer(function(input, output) {
   
   
   get_country_plot <- function(input) {
-    data_for_plot <- get_filtered(input$country, input$relationship, input$drug_name_adrian)
+    data_for_plot <- get_filtered(input$country, input$relationship, input$drug)
     my_angle <- numeric()
     if(input$angle == "Vertical") {
       my_angle <- 90
@@ -283,5 +289,5 @@ shinyServer(function(input, output) {
   })
   
   
-    
-  })
+  
+})
